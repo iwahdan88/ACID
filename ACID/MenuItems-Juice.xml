@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu-DataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+	<MenuItem>
+		<ItemName>بوريو</ItemName>
+		<Category>عصائر</Category>
+		<Size>كبير</Size>
+		<Price>14</Price>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مارس</ItemName>
+		<Category>عصائر</Category>
+		<Size>كبير</Size>
+		<Price>20</Price>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مانجو</ItemName>
+		<Category>عصائر</Category>
+		<Size>كبير</Size>
+		<Price>25</Price>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>ليمون</ItemName>
+		<Category>عصائر</Category>
+		<Size>كبير</Size>
+		<Price>30</Price>
+	</MenuItem>
+  
+</Menu-DataSet>
+

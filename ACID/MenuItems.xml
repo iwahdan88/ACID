@@ -1,0 +1,2004 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu-DataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>16</Price>
+		<Code>1</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحمة </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>17</Price>
+		<Code>2</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما ميكس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>17</Price>
+		<Code>3</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيش طاووك/أعشاب</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>16</Price>
+		<Code>4</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ بانيه</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>17</Price>
+		<Code>5</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج ايطالي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>16</Price>
+		<Code>6</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج مكسيكي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>17</Price>
+		<Code>7</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا لحم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>17</Price>
+		<Code>8</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن سوبريم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>18</Price>
+		<Code>9</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن كريسبي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>17</Price>
+		<Code>10</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كبدة اسكندراني</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>13</Price>
+		<Code>11</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بطاطس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>8</Price>
+		<Code>12</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فلافل حمص</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>كبير</Size>
+		<Price>8</Price>
+		<Code>13</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>11</Price>
+		<Code>14</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحمة </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>12</Price>
+		<Code>15</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما ميكس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>12</Price>
+		<Code>16</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيش طاووك/أعشاب</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>11</Price>
+		<Code>17</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ بانيه</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>12</Price>
+		<Code>18</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج ايطالي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>11</Price>
+		<Code>19</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج مكسيكي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>12</Price>
+		<Code>20</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا لحم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>12</Price>
+		<Code>21</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن سوبريم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>13</Price>
+		<Code>22</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن كريسبي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>12</Price>
+		<Code>23</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كبدة اسكندراني</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>7</Price>
+		<Code>24</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بطاطس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>5</Price>
+		<Code>25</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فلافل حمص</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>وسط</Size>
+		<Price>5</Price>
+		<Code>26</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>14</Price>
+		<Code>27</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحمة </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>28</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما ميكس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>29</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيش طاووك/أعشاب</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>14</Price>
+		<Code>30</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ بانيه</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>31</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج ايطالي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>14</Price>
+		<Code>32</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج مكسيكي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>33</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا لحم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>34</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن سوبريم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>35</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن كريسبي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>15</Price>
+		<Code>36</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كبدة اسكندراني</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>10</Price>
+		<Code>37</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بطاطس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>6</Price>
+		<Code>38</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فلافل حمص</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>صاج</Size>
+		<Price>6</Price>
+		<Code>39</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>25</Price>
+		<Code>40</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحمة </ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>27</Price>
+		<Code>41</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما ميكس</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>27</Price>
+		<Code>42</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيش طاووك/أعشاب</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>25</Price>
+		<Code>43</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ بانيه</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>26</Price>
+		<Code>44</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج ايطالي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>25</Price>
+		<Code>45</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا دجاج مكسيكي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>26</Price>
+		<Code>46</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فاهيتا لحم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>27</Price>
+		<Code>47</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن سوبريم</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>27</Price>
+		<Code>48</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تشيكن كريسبي</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>26</Price>
+		<Code>49</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كبدة اسكندراني</ItemName>
+		<Category>سندوتشات</Category>
+		<Size>طبق عربي</Size>
+		<Price>20</Price>
+		<Code>50</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فتة سادة</ItemName>
+		<Category>فتة</Category>
+		<Size>حجم واحد</Size>
+		<Price>15</Price>
+		<Code>53</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فتة شاورما فراخ</ItemName>
+		<Category>فتة</Category>
+		<Size>حجم واحد</Size>
+		<Price>27</Price>
+		<Code>54</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فتة شاورما لحم</ItemName>
+		<Category>فتة</Category>
+		<Size>حجم واحد</Size>
+		<Price>29</Price>
+		<Code>55</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فتة شاورما ميكس</ItemName>
+		<Category>فتة</Category>
+		<Size>حجم واحد</Size>
+		<Price>28</Price>
+		<Code>56</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>اضافة موتزاريلا</ItemName>
+		<Category>فتة</Category>
+		<Size>حجم واحد</Size>
+		<Price>5</Price>
+		<Code>57</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>منقوشة زعتر</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>8</Price>
+		<Code>58</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لبنة</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>8</Price>
+		<Code>59</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>محمرة قشقوان</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>11</Price>
+		<Code>60</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة رومي</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>12</Price>
+		<Code>61</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>موتزاريلا</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>11</Price>
+		<Code>62</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>12</Price>
+		<Code>63</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة موز</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>15</Price>
+		<Code>64</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشكل جبن</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>15</Price>
+		<Code>65</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة مكسرات</ItemName>
+		<Category>مناقيش</Category>
+		<Size>فرن </Size>
+		<Price>15</Price>
+		<Code>66</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>منقوشة زعتر</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>6</Price>
+		<Code>67</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لبنة</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>6</Price>
+		<Code>68</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>محمرة قشقوان</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>9</Price>
+		<Code>69</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة رومي</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>10</Price>
+		<Code>70</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>موتزاريلا</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>9</Price>
+		<Code>71</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>10</Price>
+		<Code>72</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة موز</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>13</Price>
+		<Code>73</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشكل جبن</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>13</Price>
+		<Code>74</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة مكسرات</ItemName>
+		<Category>مناقيش</Category>
+		<Size>صاج</Size>
+		<Price>13</Price>
+		<Code>75</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>ميكس سلاطات</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>حجم واحد</Size>
+		<Price>15</Price>
+		<Code>76</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مخلل-ثومبة-مسبحة-زبادي بالخيار</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>حجم واحد</Size>
+		<Price>3</Price>
+		<Code>77</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>ميكس كاتشب-مايونيز</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>حجم واحد</Size>
+		<Price>3</Price>
+		<Code>78</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مخلل طماطم-سلطة خضراء-تبولة</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>كبير</Size>
+		<Price>6</Price>
+		<Code>79</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فتوش-متبل-سلطة بنجر-بابا غنوج</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>كبير</Size>
+		<Price>6</Price>
+		<Code>80</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كول سلو-بطاطس مايونيز</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>كبير</Size>
+		<Price>8</Price>
+		<Code>81</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مخلل طماطم-سلطة خضراء-تبولة</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>وسط</Size>
+		<Price>3</Price>
+		<Code>82</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فتوش-متبل-سلطة بنجر-بابا غنوج</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>وسط</Size>
+		<Price>3</Price>
+		<Code>83</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كول سلو-بطاطس مايونيز</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>وسط</Size>
+		<Price>4</Price>
+		<Code>84</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سمبوسك لحم-جبنة(بالقطعة)</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>حجم واحد</Size>
+		<Price>3</Price>
+		<Code>85</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كبيبة مقلي</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>حجم واحد</Size>
+		<Price>4</Price>
+		<Code>86</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لبنة بزيت الزيتون</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>حجم واحد</Size>
+		<Price>10</Price>
+		<Code>87</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>باكت بطاطس</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>كبير</Size>
+		<Price>5</Price>
+		<Code>88</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>باكت بطاطس</ItemName>
+		<Category>السلاطات و المقبلات</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>89</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>دجاج كريسبي(2قطعة+ارز+ثومية+صوص+خبز)</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>17</Price>
+		<Code>90</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>دجاج كريسبي(3قطعة+ارز+ثومية+صوص+خبز)</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>22</Price>
+		<Code>91</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ بانيه(نطاطس+ارز او مكرونة)</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>35</Price>
+		<Code>92</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيش طاووك(بطاطس+ارز او مكرونة)</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>30</Price>
+		<Code>93</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكرونة فرن</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>8</Price>
+		<Code>94</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكرونة فرن(بالحمة المفرومة)</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>15</Price>
+		<Code>95</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكرونة بلونيز</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>15</Price>
+		<Code>96</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكرونة بالصوص الابيض و المشروم</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>18</Price>
+		<Code>97</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكرونة بالصوص الابيض و شرائح الدجاج</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>22</Price>
+		<Code>98</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكرونة بالصوص الابيض و المشروم و شرائح الدجاج</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>25</Price>
+		<Code>99</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>ارز برياني بالشاورما اللحم او الدجاج + سلطة</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>28</Price>
+		<Code>100</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كبدة مع العيش و السلطة</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>25</Price>
+		<Code>101</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>ارز برياني بالكبدة</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>20</Price>
+		<Code>102</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>ارز برياني سادة</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>10</Price>
+		<Code>103</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كيلو شاورما فراخ مع السلطة و العيش</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>140</Price>
+		<Code>104</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كيلو شاورما لحم مع السلطة و العيش</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>160</Price>
+		<Code>105</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كيلو شاورما ميكس مع السلطة و العيش</ItemName>
+		<Category>وجبات</Category>
+		<Size>حجم واحد</Size>
+		<Price>150</Price>
+		<Code>106</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>علبة</ItemName>
+		<Category>كشري</Category>
+		<Size>صغير</Size>
+		<Price>5</Price>
+		<Code>107</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>علبة</ItemName>
+		<Category>كشري</Category>
+		<Size>وسط</Size>
+		<Price>6</Price>
+		<Code>108</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>علبة</ItemName>
+		<Category>كشري</Category>
+		<Size>كبير</Size>
+		<Price>7</Price>
+		<Code>109</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>علبة</ItemName>
+		<Category>كشري</Category>
+		<Size>جامبو</Size>
+		<Price>12</Price>
+		<Code>110</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>طبق</ItemName>
+		<Category>كشري</Category>
+		<Size>صالة</Size>
+		<Price>11</Price>
+		<Code>111</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>طبق</ItemName>
+		<Category>كشري</Category>
+		<Size>صالة كمالة</Size>
+		<Price>9</Price>
+		<Code>112</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>طبق</ItemName>
+		<Category>كشري</Category>
+		<Size>فويل وسط</Size>
+		<Price>10</Price>
+		<Code>113</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>طبق</ItemName>
+		<Category>كشري</Category>
+		<Size>فويل جامبو</Size>
+		<Price>15</Price>
+		<Code>114</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>طاجن</Category>
+		<Size>حجم واحد</Size>
+		<Price>9</Price>
+		<Code>115</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>طاجن</Category>
+		<Size>حجم واحد</Size>
+		<Price>9</Price>
+		<Code>116</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحمة مفرومة</ItemName>
+		<Category>طاجن</Category>
+		<Size>حجم واحد</Size>
+		<Price>9</Price>
+		<Code>117</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كيدة اسكندراني</ItemName>
+		<Category>طاجن</Category>
+		<Size>حجم واحد</Size>
+		<Price>9</Price>
+		<Code>118</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ</ItemName>
+		<Category>طاجن</Category>
+		<Size>حجم واحد</Size>
+		<Price>9</Price>
+		<Code>119</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشلتت</ItemName>
+		<Category>فطير</Category>
+		<Size>وسط</Size>
+		<Price>25</Price>
+		<Code>120</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشلتت</ItemName>
+		<Category>فطير</Category>
+		<Size>كبير</Size>
+		<Price>25</Price>
+		<Code>121</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>طلب جبنة قديمة</ItemName>
+		<Category>فطير</Category>
+		<Size>حجم واحد</Size>
+		<Price>7</Price>
+		<Code>122</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>عسل نحل</ItemName>
+		<Category>فطير</Category>
+		<Size>حجم واحد</Size>
+		<Price>10</Price>
+		<Code>123</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة</ItemName>
+		<Category>فطير</Category>
+		<Size>حجم واحد</Size>
+		<Price>14</Price>
+		<Code>124</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة قريش </ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>16</Price>
+		<Code>125</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة رومي</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>126</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوسيس</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>22</Price>
+		<Code>127</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحم مفروم</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>128</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>دجاج</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>25</Price>
+		<Code>129</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بسطرمة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>130</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تونة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>25</Price>
+		<Code>131</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>خضراوات</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>16</Price>
+		<Code>132</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>22</Price>
+		<Code>133</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>22</Price>
+		<Code>134</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحم</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>135</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما دجاج </ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>25</Price>
+		<Code>136</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بيض بالبسطرمة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>30</Price>
+		<Code>137</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>انشوجة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>25</Price>
+		<Code>138</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبن مشكل</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>139</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحم مشكل</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>22</Price>
+		<Code>140</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بيض</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>وسط</Size>
+		<Price>16</Price>
+		<Code>141</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة قريش </ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>25</Price>
+		<Code>142</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة رومي</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>30</Price>
+		<Code>143</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوسيس</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>35</Price>
+		<Code>144</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحم مفروم</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>39</Price>
+		<Code>145</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>دجاج</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>37</Price>
+		<Code>146</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بسطرمة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>39</Price>
+		<Code>147</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تونة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>37</Price>
+		<Code>148</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>خضراوات</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>25</Price>
+		<Code>149</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>35</Price>
+		<Code>150</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>35</Price>
+		<Code>151</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحم</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>39</Price>
+		<Code>152</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما دجاج </ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>37</Price>
+		<Code>153</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بيض بالبسطرمة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>42</Price>
+		<Code>154</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>انشوجة</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>37</Price>
+		<Code>155</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبن مشكل</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>45</Price>
+		<Code>156</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحم مشكل</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>45</Price>
+		<Code>157</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بيض</ItemName>
+		<Category>فطير حادق</Category>
+		<Size>كبير</Size>
+		<Price>25</Price>
+		<Code>158</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سكر رول</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>6</Price>
+		<Code>159</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>18</Price>
+		<Code>160</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>زبيب جوز هند</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>16</Price>
+		<Code>161</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>عسل نحل</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>18</Price>
+		<Code>162</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة و كربمة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>163</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة بالمربي</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>164</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكسرات</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>22</Price>
+		<Code>165</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>166</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سكر بالبن رول</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>167</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كريمة و مربي</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>168</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة بالعسل</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>23</Price>
+		<Code>169</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة و كريمة و مربي</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>23</Price>
+		<Code>170</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيخ البلد</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>28</Price>
+		<Code>171</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيخ البلد بالقشطة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>33</Price>
+		<Code>172</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيخ البلد بالفواكه</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>33</Price>
+		<Code>173</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>موز</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>16</Price>
+		<Code>174</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تفاح</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>وسط</Size>
+		<Price>16</Price>
+		<Code>175</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سكر رول</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>10</Price>
+		<Code>176</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>30</Price>
+		<Code>177</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>زبيب جوز هند</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>24</Price>
+		<Code>178</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>عسل نحل</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>28</Price>
+		<Code>179</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة و كربمة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>32</Price>
+		<Code>180</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة بالمربي</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>32</Price>
+		<Code>181</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكسرات</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>33</Price>
+		<Code>182</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شوكولاتة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>30</Price>
+		<Code>183</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سكر بالبن رول</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>12</Price>
+		<Code>184</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>كريمة و مربي</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>30</Price>
+		<Code>185</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة بالعسل</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>35</Price>
+		<Code>186</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>قشطة و كريمة و مربي</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>35</Price>
+		<Code>187</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيخ البلد</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>40</Price>
+		<Code>188</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيخ البلد بالقشطة</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>45</Price>
+		<Code>189</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شيخ البلد بالفواكه</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>45</Price>
+		<Code>190</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>موز</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>26</Price>
+		<Code>191</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تفاح</ItemName>
+		<Category>فطير حلو</Category>
+		<Size>كبير</Size>
+		<Price>26</Price>
+		<Code>192</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مارجريتا</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>20</Price>
+		<Code>193</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>194</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوسيس</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>195</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>196</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بسطرمة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>30</Price>
+		<Code>197</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحمة مفرومة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>30</Price>
+		<Code>198</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوبر سوبريم</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>40</Price>
+		<Code>199</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحمة </ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>30</Price>
+		<Code>200</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>201</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تونة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>202</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>انشوجة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>27</Price>
+		<Code>203</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جمبري</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>40</Price>
+		<Code>204</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فواكه بحر</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>40</Price>
+		<Code>205</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشكلة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>وسط</Size>
+		<Price>40</Price>
+		<Code>206</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مارجريتا</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>30</Price>
+		<Code>207</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>40</Price>
+		<Code>208</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوسيس</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>40</Price>
+		<Code>209</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>40</Price>
+		<Code>210</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بسطرمة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>42</Price>
+		<Code>211</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحمة مفرومة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>42</Price>
+		<Code>212</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوبر سوبريم</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>55</Price>
+		<Code>213</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما لحمة </ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>42</Price>
+		<Code>214</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>41</Price>
+		<Code>215</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تونة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>40</Price>
+		<Code>216</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>انشوجة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>40</Price>
+		<Code>217</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جمبري</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>55</Price>
+		<Code>218</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فواكه بحر</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>55</Price>
+		<Code>219</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشكلة</ItemName>
+		<Category>بيتزا</Category>
+		<Size>كبير</Size>
+		<Price>55</Price>
+		<Code>220</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>خضراوات</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>5</Price>
+		<Code>221</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بيض</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>5</Price>
+		<Code>222</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>223</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوسيس</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>224</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>225</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تونة</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>226</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة رومي</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>8</Price>
+		<Code>227</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحمة مفرومة</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>10</Price>
+		<Code>228</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بسطرمة</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>10</Price>
+		<Code>229</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName> شاورما لحم</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>10</Price>
+		<Code>230</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>10</Price>
+		<Code>231</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>عسل نحل</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>7</Price>
+		<Code>232</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بندق</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>5</Price>
+		<Code>233</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكسرات</ItemName>
+		<Category>اضافات</Category>
+		<Size>وسط</Size>
+		<Price>7</Price>
+		<Code>234</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>خضراوات</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>7</Price>
+		<Code>235</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بيض</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>7</Price>
+		<Code>236</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سجق</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>12</Price>
+		<Code>237</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>سوسيس</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>12</Price>
+		<Code>238</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مشروم </ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>12</Price>
+		<Code>239</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>تونة</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>12</Price>
+		<Code>240</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>جبنة رومي</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>12</Price>
+		<Code>241</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>لحمة مفرومة</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>14</Price>
+		<Code>242</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بسطرمة</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>14</Price>
+		<Code>243</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName> شاورما لحم</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>14</Price>
+		<Code>244</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>شاورما فراخ </ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>14</Price>
+		<Code>245</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>عسل نحل</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>10</Price>
+		<Code>246</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>بندق</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>7</Price>
+		<Code>247</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>مكسرات</ItemName>
+		<Category>اضافات</Category>
+		<Size>كبير</Size>
+		<Price>10</Price>
+		<Code>248</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ مشوية </ItemName>
+		<Category>وجبات مشوية</Category>
+		<Size>ربع</Size>
+		<Price>18</Price>
+		<Code>249</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ مشوية </ItemName>
+		<Category>وجبات مشوية</Category>
+		<Size>نصف</Size>
+		<Price>34</Price>
+		<Code>250</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>فراخ مشوية </ItemName>
+		<Category>وجبات مشوية</Category>
+		<Size>كاملة</Size>
+		<Price>63</Price>
+		<Code>251</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+	<MenuItem>
+		<ItemName>رغيف حواوشي</ItemName>
+		<Category>حواوشي</Category>
+		<Size>حجم واحد</Size>
+		<Price>9</Price>
+		<Code>252</Code>
+		<EntryDate>42077</EntryDate>
+	</MenuItem>
+</Menu-DataSet>
+
