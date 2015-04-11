@@ -99,6 +99,7 @@ namespace ACID
             String Date;
 
 
+
             CmdTxt = "SELECT current_timestamp()";
 
             cmd.Connection = myConn;
@@ -211,7 +212,28 @@ namespace ACID
                 while (reader.Read())
                 {
                     LastOrderDate = reader.GetDateTime("DateTime");
-                    SubOrderNo = reader.GetInt32("OrderSubID");
+                    //SubOrderNo = reader.GetInt32("OrderSubID");
+                }
+                myConn.Close();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                myConn.Close();
+                return;
+            }
+
+            CmdTxt = "SELECT * FROM order_count;";
+            cmd.CommandText = CmdTxt;
+
+            try
+            {
+                myConn.Open();
+                reader = cmd.ExecuteReader();
+                Cursor.Current = Cursors.WaitCursor;
+                while (reader.Read())
+                {
+                    SubOrderNo = reader.GetInt32("OrderCount");
                 }
                 myConn.Close();
             }
@@ -235,6 +257,8 @@ namespace ACID
                 OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
             }
 
+
+
             NewOrder = new Order(OrderTypes.Delivery);
             NewOrder.Order_SetCustAddr(MyCustomer.GetAddr());
             NewOrder.Order_SetCustTel(MyCustomer.GetPhoneNum());
@@ -248,6 +272,26 @@ namespace ACID
                 MessageBox.Show("You Cannot Save Order at Time earlier than the most recent one on DataBase");
                 return;
             }
+            /*Update Daily Order Count*/
+            CmdTxt = "UPDATE order_count SET OrderCount =" + "'"+SubOrderNo+"'" + " WHERE Row =0" + ";";
+            cmd.CommandText = CmdTxt;
+
+            try
+            {
+                /* Open Command Connection */
+                myConn.Open();
+                /* Execute Command */
+                cmd.ExecuteNonQuery();
+                /* Close Connection */
+                myConn.Close();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            /*Save Order*/
             if(!SaveOrder())
             {
                 MessageBox.Show("Error Saving Order on DataBase");
@@ -257,6 +301,8 @@ namespace ACID
             PrintDocument Reciept = new PrintDocument();
             Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
             Reciept.Print();
+
+
 #if DELIVERY
             this.Dispose();
 #endif
