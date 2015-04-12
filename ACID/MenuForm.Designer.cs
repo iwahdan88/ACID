@@ -39,12 +39,13 @@ namespace ACID
             this.Delete_Item = new System.Windows.Forms.Button();
             this.Finish_Order = new System.Windows.Forms.Button();
             this.OrderedList = new System.Windows.Forms.DataGridView();
-            this.CheckBox_Delivery = new System.Windows.Forms.CheckBox();
-            this.CheckBox_In = new System.Windows.Forms.CheckBox();
-            this.CheckBox_TA = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.Cat_Panel = new System.Windows.Forms.FlowLayoutPanel();
+            this.UserIDLabel = new System.Windows.Forms.Label();
+            this.CurrUserID = new System.Windows.Forms.Label();
+            this.Server = new System.Windows.Forms.Label();
+            this.Server_Name = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderedList)).BeginInit();
@@ -114,42 +115,6 @@ namespace ACID
             this.OrderedList.TabIndex = 8;
             this.OrderedList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrderedList_RowHeaderMouseDoubleClick);
             // 
-            // CheckBox_Delivery
-            // 
-            this.CheckBox_Delivery.AutoCheck = false;
-            this.CheckBox_Delivery.AutoSize = true;
-            this.CheckBox_Delivery.Checked = true;
-            this.CheckBox_Delivery.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBox_Delivery.Location = new System.Drawing.Point(22, 797);
-            this.CheckBox_Delivery.Name = "CheckBox_Delivery";
-            this.CheckBox_Delivery.Size = new System.Drawing.Size(81, 17);
-            this.CheckBox_Delivery.TabIndex = 10;
-            this.CheckBox_Delivery.Text = "خدمة توصيل";
-            this.CheckBox_Delivery.UseVisualStyleBackColor = true;
-            this.CheckBox_Delivery.CheckedChanged += new System.EventHandler(this.CheckBox_Delivery_CheckedChanged);
-            // 
-            // CheckBox_In
-            // 
-            this.CheckBox_In.AutoSize = true;
-            this.CheckBox_In.Location = new System.Drawing.Point(22, 843);
-            this.CheckBox_In.Name = "CheckBox_In";
-            this.CheckBox_In.Size = new System.Drawing.Size(47, 17);
-            this.CheckBox_In.TabIndex = 11;
-            this.CheckBox_In.Text = "صالة";
-            this.CheckBox_In.UseVisualStyleBackColor = true;
-            this.CheckBox_In.CheckedChanged += new System.EventHandler(this.CheckBox_In_CheckedChanged);
-            // 
-            // CheckBox_TA
-            // 
-            this.CheckBox_TA.AutoSize = true;
-            this.CheckBox_TA.Location = new System.Drawing.Point(22, 820);
-            this.CheckBox_TA.Name = "CheckBox_TA";
-            this.CheckBox_TA.Size = new System.Drawing.Size(67, 17);
-            this.CheckBox_TA.TabIndex = 12;
-            this.CheckBox_TA.Text = "تيك اواي";
-            this.CheckBox_TA.UseVisualStyleBackColor = true;
-            this.CheckBox_TA.CheckedChanged += new System.EventHandler(this.CheckBox_TA_CheckedChanged);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -194,17 +159,52 @@ namespace ACID
             this.Cat_Panel.Size = new System.Drawing.Size(882, 115);
             this.Cat_Panel.TabIndex = 14;
             // 
+            // UserIDLabel
+            // 
+            this.UserIDLabel.AutoSize = true;
+            this.UserIDLabel.Location = new System.Drawing.Point(755, 12);
+            this.UserIDLabel.Name = "UserIDLabel";
+            this.UserIDLabel.Size = new System.Drawing.Size(43, 13);
+            this.UserIDLabel.TabIndex = 15;
+            this.UserIDLabel.Text = "UserID:";
+            // 
+            // CurrUserID
+            // 
+            this.CurrUserID.AutoSize = true;
+            this.CurrUserID.Location = new System.Drawing.Point(816, 12);
+            this.CurrUserID.Name = "CurrUserID";
+            this.CurrUserID.Size = new System.Drawing.Size(0, 13);
+            this.CurrUserID.TabIndex = 16;
+            // 
+            // Server
+            // 
+            this.Server.AutoSize = true;
+            this.Server.Location = new System.Drawing.Point(755, 28);
+            this.Server.Name = "Server";
+            this.Server.Size = new System.Drawing.Size(41, 13);
+            this.Server.TabIndex = 17;
+            this.Server.Text = "Server:";
+            // 
+            // Server_Name
+            // 
+            this.Server_Name.AutoSize = true;
+            this.Server_Name.Location = new System.Drawing.Point(802, 28);
+            this.Server_Name.Name = "Server_Name";
+            this.Server_Name.Size = new System.Drawing.Size(0, 13);
+            this.Server_Name.TabIndex = 18;
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(992, 868);
+            this.Controls.Add(this.Server_Name);
+            this.Controls.Add(this.Server);
+            this.Controls.Add(this.CurrUserID);
+            this.Controls.Add(this.UserIDLabel);
             this.Controls.Add(this.Cat_Panel);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.CheckBox_TA);
-            this.Controls.Add(this.CheckBox_In);
-            this.Controls.Add(this.CheckBox_Delivery);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OrderedList);
             this.Controls.Add(this.Finish_Order);
@@ -214,7 +214,7 @@ namespace ACID
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MenuForm";
+            this.Text = "MenuForm - TakeAway";
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderedList)).EndInit();
@@ -226,21 +226,22 @@ namespace ACID
 
         #endregion
 
-        public System.Data.DataSet dataSet1;
-        public System.Data.DataSet dataSet2;
+        protected System.Data.DataSet dataSet1;
+        protected System.Data.DataSet dataSet2;
         private System.Windows.Forms.Button Add_Item;
         private System.Windows.Forms.Button Delete_Item;
         private System.Windows.Forms.Button Finish_Order;
-        public System.Windows.Forms.DataGridView OrderedList;
-        public System.Windows.Forms.CheckBox CheckBox_Delivery;
-        public System.Windows.Forms.CheckBox CheckBox_In;
-        public System.Windows.Forms.CheckBox CheckBox_TA;
-        public System.Windows.Forms.DataGridView dataGridView1;
+        protected System.Windows.Forms.DataGridView OrderedList;
+        protected System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.FlowLayoutPanel Cat_Panel;
-        private MySql.Data.MySqlClient.MySqlConnection myConn;
-        private Order NewOrder;
-        private Customer MyCustomer;
-        private string UserID;
+        protected MySql.Data.MySqlClient.MySqlConnection myConn;
+        protected Customer MyCustomer;
+        protected string UserID;
+        protected string Password;
+        protected System.Windows.Forms.Label UserIDLabel;
+        protected System.Windows.Forms.Label CurrUserID;
+        protected System.Windows.Forms.Label Server;
+        protected System.Windows.Forms.Label Server_Name;
     }
 }

@@ -92,12 +92,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCust.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddCust.Designer.cs">
-      <DependentUpon>AddCust.cs</DependentUpon>
-    </Compile>
     <Compile Include="Authentication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,9 +124,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddCust.resx">
-      <DependentUpon>AddCust.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Authentication.resx">
       <DependentUpon>Authentication.cs</DependentUpon>
     </EmbeddedResource>
