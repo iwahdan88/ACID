@@ -29,6 +29,7 @@ namespace ACID
         Thread ProgressTherad;
         private Order NewOrder;
         private String UserName;
+        private int CurrentTblindex;
 
         public Engine(String UserID, String Pass): base(UserID, Pass)
         {
@@ -277,6 +278,7 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                this.myConn.Close();
                 return;
             }
 
@@ -284,8 +286,54 @@ namespace ACID
             if (!SaveOrder())
             {
                 MessageBox.Show("Error Saving Order on DataBase");
+                this.myConn.Close();
                 return;
             }
+
+            /*Update List of Ordered Items*/
+
+            CmdTxt = "INSERT INTO ordered_items(ItemCode, OrderID, Quantity, Price, ItemName, ItemSize, Category, OrderType) VALUES(@Code, @Order_ID, @quantity, @ItemPrice, @Name, @Size, @Cat, @Type)";
+
+            cmd.CommandText = CmdTxt;
+
+            try
+            {
+                myConn.Open();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.myConn.Close();
+            }
+
+            /* Fill Command attributes */
+
+            for (int loopIndex = 0; loopIndex < dataSet2.Tables[0].Rows.Count; loopIndex++ )
+            {
+                cmd.Parameters.AddWithValue("@Code", dataSet2.Tables[1].Rows[loopIndex].ItemArray[0]);
+                cmd.Parameters.AddWithValue("@Order_ID", NewOrder.Order_GetOrderID());
+                cmd.Parameters.AddWithValue("@quantity", dataSet2.Tables[0].Rows[loopIndex].ItemArray[0]);
+                cmd.Parameters.AddWithValue("@ItemPrice", dataSet2.Tables[0].Rows[loopIndex].ItemArray[3]);
+                cmd.Parameters.AddWithValue("@Name", dataSet2.Tables[0].Rows[loopIndex].ItemArray[1]);
+                cmd.Parameters.AddWithValue("@Size", dataSet2.Tables[0].Rows[loopIndex].ItemArray[2]);
+                cmd.Parameters.AddWithValue("@Cat", dataSet2.Tables[1].Rows[loopIndex].ItemArray[1]);
+                cmd.Parameters.AddWithValue("@Type", NewOrder.Order_GetOrderType().ToString());
+
+                try
+                {
+                    /* Execute Command */
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    this.myConn.Close();
+                    break;
+                }
+            }
+
+            this.myConn.Close();
 
             PrintDocument Reciept = new PrintDocument();
             Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
@@ -459,11 +507,14 @@ namespace ACID
             String ItemPrice;
             String ItemSize;
             String count;
+            String ItemCode;
             int ItemCount = 1;
 
             ItemName = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
             ItemPrice = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[2].Value.ToString();
             ItemSize = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[1].Value.ToString();
+
+            ItemCode = this.dataSet1.Tables[CurrentTblindex].Rows[dataGridView1.SelectedRows[0].Index].ItemArray[4].ToString();
 
             DataRow[] Names = this.dataSet2.Tables[0].Select("الاسم= '" + ItemName + "' and " + "الحجم= '" + ItemSize + "'");
 
@@ -478,6 +529,8 @@ namespace ACID
             {
                 this.dataSet2.Tables[0].Rows.Add(ItemCount.ToString(), ItemName, ItemSize, ItemPrice);
             }
+
+            dataSet2.Tables[1].Rows.Add(ItemCode, this.dataSet1.Tables[CurrentTblindex].TableName);
 
         }
         private void DeleteItem()
@@ -584,6 +637,7 @@ namespace ACID
             int TblIndex = 0;
             CatName = ((Button)sender).Text;
             TblIndex = this.dataSet1.Tables.IndexOf(CatName);
+            CurrentTblindex = TblIndex;
             this.dataGridView1.DataSource = this.dataSet1.Tables[TblIndex];
         }
 
@@ -648,22 +702,26 @@ namespace ACID
                 this.dataSet1.Tables[tbls].Columns.Add("الاسم", typeof(String));
                 this.dataSet1.Tables[tbls].Columns.Add("الحجم", typeof(String));
                 this.dataSet1.Tables[tbls].Columns.Add("السعر", typeof(String));
+                this.dataSet1.Tables[tbls].Columns.Add("الصنف", typeof(String));
+                this.dataSet1.Tables[tbls].Columns.Add("كود", typeof(String));
             }
             String ItemName = "";
             double ItemPrice = 0;
             String ItemSize = "";
             String CatName = "";
             int CatIndex = 0;
+            String ItemCode = "";
 
             for (int items = 0; items < TotalMenuItems; items++)
             {
                 ItemName = elemList.Item(items).ChildNodes.Item(0).InnerText;
                 ItemSize = elemList.Item(items).ChildNodes.Item(2).InnerText;
                 ItemPrice = Convert.ToDouble(elemList.Item(items).ChildNodes.Item(3).InnerText);
+                ItemCode = elemList.Item(items).ChildNodes.Item(4).InnerText;
                 CatName = elemList.Item(items).ChildNodes.Item(1).InnerText;
                 CatIndex = this.dataSet1.Tables.IndexOf(CatName);
                 // add row to corresponding table
-                this.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString() });
+                this.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString(), CatName, ItemCode });
             }
 
             this.dataGridView1.DataSource = this.dataSet1.Tables[0];
@@ -679,7 +737,10 @@ namespace ACID
             this.dataSet2.Tables[0].Columns.Add("الحجم", typeof(String));
             this.dataSet2.Tables[0].Columns.Add("السعر", typeof(String));
 
-            //Menu.dataSet2.Tables[0].PrimaryKey = new DataColumn[]{Menu.dataSet2.Tables[0].Columns[1]};
+            this.dataSet2.Tables.Add(new DataTable("Codes"));
+
+            this.dataSet2.Tables[1].Columns.Add("Code", typeof(String));
+            this.dataSet2.Tables[1].Columns.Add("Category", typeof(String));
 
             this.OrderedList.DataSource = this.dataSet2.Tables[0];
 
