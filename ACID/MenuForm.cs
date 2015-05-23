@@ -23,17 +23,13 @@ namespace ACID
             myConn = Conn;
             this.UserID = User;
         }
-        public MenuForm(MySql.Data.MySqlClient.MySqlConnection Conn, Customer Customer, String User)
+        public MenuForm(MySql.Data.MySqlClient.MySqlConnection Conn, Customer Customer, String User, String ServerName)
         {
             InitializeComponent();
             myConn = Conn;
             MyCustomer = Customer;
             this.UserID = User;
-        }
-
-        private void SubMenu_1_Paint(object sender, PaintEventArgs e)
-        {
-
+            Server_Name = ServerName;
         }
 
         private void Add_Item_Click(object sender, EventArgs e)
@@ -59,35 +55,6 @@ namespace ACID
             DeleteItem();
         }
 
-        private void CheckBox_Delivery_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CheckBox_TA_CheckedChanged(object sender, EventArgs e)
-        {
-            if(this.CheckBox_TA.Checked == true)
-            {
-                this.CheckBox_In.Enabled = false;
-            }
-            else
-            {
-                this.CheckBox_In.Enabled = true;
-            }
-        }
-
-        private void CheckBox_In_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.CheckBox_In.Checked == true)
-            {
-                this.CheckBox_TA.Enabled = false;
-            }
-            else
-            {
-                this.CheckBox_TA.Enabled = true;
-            }
-        }
-
         private void Finish_Order_Click(object sender, EventArgs e)
         {
             String CmdTxt;
@@ -98,128 +65,35 @@ namespace ACID
             DateTime LastOrderDate = new DateTime();
             String Date;
 
+            String ChangeTimeZone = "SET @@session.time_zone='+02:00';";
 
+            if (this.Server_Name == "Remote")
+            {
+                CmdTxt = ChangeTimeZone + "\n" + "SELECT current_timestamp()";
+            }
+            else
+            {
+                CmdTxt = "SELECT current_timestamp()";
+            }
 
-            CmdTxt = "SELECT current_timestamp()";
-
-            cmd.Connection = myConn;
+            cmd.Connection = this.myConn;
             cmd.CommandText = CmdTxt;
 
             try
             {
-                myConn.Open();
+                this.myConn.Open();
                 reader = cmd.ExecuteReader();
                 Cursor.Current = Cursors.WaitCursor;
                 while (reader.Read())
                 {
                     NewDate = reader.GetDateTime("current_timestamp()");
                 }
-                myConn.Close();
+                this.myConn.Close();
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
-                myConn.Close();
-                return;
-            }
-
-#if !DELIVERY
-            if((this.CheckBox_In.Checked == false) && (this.CheckBox_TA.Checked == false))
-            {
-                MessageBox.Show("--اختار نوع الطلب -- صالة أو تيك اواي");
-                return;
-            }
-            else if (this.CheckBox_TA.Checked == true)
-            {
-                CmdTxt = "SELECT * FROM take_away ORDER BY DateTime DESC LIMIT 1";
-                cmd.CommandText = CmdTxt;
-
-                try
-                {
-                    myConn.Open();
-                    reader = cmd.ExecuteReader();
-                    Cursor.Current = Cursors.WaitCursor;
-                    while (reader.Read())
-                    {
-                        LastOrderDate = reader.GetDateTime("DateTime");
-                        SubOrderNo = reader.GetInt32("OrderSubID");
-                    }
-                    myConn.Close();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    myConn.Close();
-                    return;
-                }
-
-                NewOrder = new Order(OrderTypes.TakeAway);
-            }
-            else
-            {
-                CmdTxt = "SELECT * FROM indoor ORDER BY DateTime DESC LIMIT 1";
-                cmd.CommandText = CmdTxt;
-
-                try
-                {
-                    myConn.Open();
-                    reader = cmd.ExecuteReader();
-                    Cursor.Current = Cursors.WaitCursor;
-                    while (reader.Read())
-                    {
-                        LastOrderDate = reader.GetDateTime("DateTime");
-                        SubOrderNo = reader.GetInt32("OrderSubID");
-                    }
-                    myConn.Close();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    myConn.Close();
-                    return;
-                }
-
-                NewOrder = new Order(OrderTypes.Indoor);
-            }
-
-            Date = (LastOrderDate).Date.ToString();
-
-            if (Date != NewDate.Date.ToString())
-            {
-                SubOrderNo = 1;
-                OrderID = ConverToID(NewDate.Date.ToString(), SubOrderNo);
-            }
-            else
-            {
-                SubOrderNo++;
-                OrderID = ConverToID(NewDate.Date.ToString(), SubOrderNo);
-            }
-
-            NewOrder.Order_SetOrderID(OrderID);
-            NewOrder.Order_SetOrderSubID(SubOrderNo);
-            NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
-            NewOrder.Order_SetTimestmp(NewDate.Date.ToString());
-#else
-
-            CmdTxt = "SELECT * FROM delivery_orders ORDER BY DateTime DESC LIMIT 1";
-            cmd.CommandText = CmdTxt;
-            
-            try
-            {
-                myConn.Open();
-                reader = cmd.ExecuteReader();
-                Cursor.Current = Cursors.WaitCursor;
-                while (reader.Read())
-                {
-                    LastOrderDate = reader.GetDateTime("DateTime");
-                    //SubOrderNo = reader.GetInt32("OrderSubID");
-                }
-                myConn.Close();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                myConn.Close();
+                this.myConn.Close();
                 return;
             }
 
@@ -244,46 +118,77 @@ namespace ACID
                 return;
             }
 
-            Date = ((LastOrderDate.Date.ToString()).Split(new char[]{' '}))[0];
+            CmdTxt = "SELECT * FROM order_count";
+            cmd.CommandText = CmdTxt;
+
+            try
+            {
+                this.myConn.Open();
+                reader = cmd.ExecuteReader();
+                Cursor.Current = Cursors.WaitCursor;
+                while (reader.Read())
+                {
+                    LastOrderDate = reader.GetDateTime("DateTime");
+                }
+                this.myConn.Close();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.myConn.Close();
+                return;
+            }
+
+            NewOrder = new Order(OrderTypes.Delivery);
+
+            SubOrderNo++;
+
+            Date = ((LastOrderDate.Date.ToString()).Split(new char[] { ' ' }))[0];
 
             if (Date != ((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0])
             {
+                /*Reset Sub ID*/
                 SubOrderNo = 1;
                 OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
             }
             else
             {
-                SubOrderNo++;
                 OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
             }
 
-
-
-            NewOrder = new Order(OrderTypes.Delivery);
-            NewOrder.Order_SetCustAddr(MyCustomer.GetAddr());
-            NewOrder.Order_SetCustTel(MyCustomer.GetPhoneNum());
             NewOrder.Order_SetOrderID(OrderID);
             NewOrder.Order_SetOrderSubID(SubOrderNo);
-            NewOrder.Order_SetOrderTotal(GetTotalOrderValue() + NewOrder.Order_GetDeliveryCharge());
+            NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
             NewOrder.Order_SetTimestmp(NewDate.ToString());
-#endif
-            if (System.DateTime.Now.CompareTo(LastOrderDate) < 0 )
+            NewOrder.Order_SetCustAddr(this.MyCustomer.GetAddr());
+            NewOrder.Order_SetCustTel(this.MyCustomer.GetPhoneNum());
+
+            if (System.DateTime.Now.CompareTo(LastOrderDate) < 0)
             {
                 MessageBox.Show("You Cannot Save Order at Time earlier than the most recent one on DataBase");
                 return;
             }
             /*Update Daily Order Count*/
-            CmdTxt = "UPDATE order_count SET OrderCount =" + "'"+SubOrderNo+"'" + " WHERE Row =0" + ";";
+
+            if (this.Server_Name == "Remote")
+            {
+                CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+            }
+            else
+            {
+                CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+            }
+
             cmd.CommandText = CmdTxt;
 
             try
             {
                 /* Open Command Connection */
-                myConn.Open();
+                this.myConn.Open();
                 /* Execute Command */
                 cmd.ExecuteNonQuery();
                 /* Close Connection */
-                myConn.Close();
+                this.myConn.Close();
             }
             catch (MySqlException ex)
             {
@@ -292,7 +197,7 @@ namespace ACID
             }
 
             /*Save Order*/
-            if(!SaveOrder())
+            if (!SaveOrder())
             {
                 MessageBox.Show("Error Saving Order on DataBase");
                 return;
@@ -302,10 +207,10 @@ namespace ACID
             Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
             Reciept.Print();
 
+            /* Reset Orders*/
+            this.dataSet2.Tables[0].Clear();
 
-#if DELIVERY
             this.Dispose();
-#endif
         }
         private void PrintReciept(Object sender, PrintPageEventArgs e)
         {
@@ -475,68 +380,23 @@ namespace ACID
             String CmdTxt = "";
             MySqlCommand cmd = new MySqlCommand();
             bool IsOk = true;
-#if DELIVERY
 
             CmdTxt = @"INSERT INTO delivery_orders(OrderID, OrderSubID, Tel, Addresse, UserID, Delivery_Charge, OrderTotal)
                                                         VALUES(@ID, @SubID, @tel, @Addr, @User, @DeliveryCharge, @Total);";
-#else
-            if(this.CheckBox_TA.Checked == true)
-            {
-
-                CmdTxt = @"INSERT INTO take_away(OrderID, OrderSubID, UserID, OrderTotal)
-                                                        VALUES(@ID, @SubID, @User, @Total);";
-            }
-            else if(this.CheckBox_In.Checked == true)
-            {
-
-                CmdTxt = @"INSERT INTO indoor(OrderID, OrderSubID, UserID, OrderTotal, ServiceCharge, TableNo)
-                                                        VALUES(@ID, @SubID, @User, @Total, @Service, @Table);";
-            }
-#endif
 
             cmd.Connection = this.myConn;
             cmd.CommandText = CmdTxt;
 
-            switch(NewOrder.Order_GetOrderType())
-            {
-                case OrderTypes.Delivery:
+            /* Fill Command attributes */
 
-                    /* Fill Command attributes */
+            cmd.Parameters.AddWithValue("@ID", NewOrder.Order_GetOrderID());
+            cmd.Parameters.AddWithValue("@SubID", NewOrder.Order_GetOrderSubID());
+            cmd.Parameters.AddWithValue("@tel", NewOrder.Order_GetCustTel());
+            cmd.Parameters.AddWithValue("@Addr", NewOrder.Order_GetCustAddr());
+            cmd.Parameters.AddWithValue("@User", this.UserID);
+            cmd.Parameters.AddWithValue("@DeliveryCharge", NewOrder.Order_GetDeliveryCharge());
+            cmd.Parameters.AddWithValue("@Total", NewOrder.Order_GetOrderTotal());
 
-                    cmd.Parameters.AddWithValue("@ID", NewOrder.Order_GetOrderID());
-                    cmd.Parameters.AddWithValue("@SubID", NewOrder.Order_GetOrderSubID());
-                    cmd.Parameters.AddWithValue("@tel", NewOrder.Order_GetCustTel());
-                    cmd.Parameters.AddWithValue("@Addr", NewOrder.Order_GetCustAddr());
-                    cmd.Parameters.AddWithValue("@User", this.UserID);
-                    cmd.Parameters.AddWithValue("@DeliveryCharge", NewOrder.Order_GetDeliveryCharge());
-                    cmd.Parameters.AddWithValue("@Total", NewOrder.Order_GetOrderTotal());
-
-                    break;
-                case OrderTypes.TakeAway:
-
-                    /* Fill Command attributes */
-
-                    cmd.Parameters.AddWithValue("@ID", NewOrder.Order_GetOrderID());
-                    cmd.Parameters.AddWithValue("@SubID", NewOrder.Order_GetOrderSubID());
-                    cmd.Parameters.AddWithValue("@User", this.UserID);
-                    cmd.Parameters.AddWithValue("@Total", NewOrder.Order_GetOrderTotal());
-
-                    break;
-                case OrderTypes.Indoor:
-
-                    /* Fill Command attributes */
-
-                    cmd.Parameters.AddWithValue("@ID", NewOrder.Order_GetOrderID());
-                    cmd.Parameters.AddWithValue("@SubID", NewOrder.Order_GetOrderSubID());
-                    cmd.Parameters.AddWithValue("@User", this.UserID);
-                    cmd.Parameters.AddWithValue("@Service", 0);
-                    cmd.Parameters.AddWithValue("@Table", 0);
-                    cmd.Parameters.AddWithValue("@Total", NewOrder.Order_GetOrderTotal());
-
-                    break;
-                default:
-                    break;
-            }
 
             try
             {
@@ -554,11 +414,6 @@ namespace ACID
             }
 
             return IsOk;         
-        }
-        
-        private void ListView1_ItemSelectionChanged(Object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-
         }
 
         private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

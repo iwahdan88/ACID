@@ -108,20 +108,6 @@ namespace ACID
         {
             AuthForm = new Authentication();
             AuthForm.Visible = true;
-
-            /*while (MySqlConnEstablished == false)
-            {
-                if (IsExceptionRaised == true)
-                {
-                    AuthForm.Close();
-                    MessageBox.Show(Exeption.Message);
-                    return;
-                }
-                else
-                {
-                     Do Nothing 
-                }
-            }*/
         }
         protected override void NewCust_Click(object sender, EventArgs e)
         {
@@ -343,7 +329,7 @@ namespace ACID
                         "pwd=" + Password + ";" + "database=orders;";
             conn.ConnectionString = myConnectionString;
 
-            Menu = new MenuForm(conn, CustTobeSearched, CurrUserID);
+            Menu = new MenuForm(conn, CustTobeSearched, CurrUserID, this.Server_Name.Text);
             ListOfTables = new DataTable[DataTables.Count];
             CatButtons = new Button[DataTables.Count];
 
@@ -410,15 +396,6 @@ namespace ACID
             Menu.OrderedList.Columns[1].Width = 500;
             Menu.OrderedList.Columns[2].Width = 250;
             Menu.OrderedList.Columns[2].Width = 230;
-
-#if DELIVERY
-            Menu.CheckBox_In.Enabled = false;
-            Menu.CheckBox_TA.Enabled = false;
-#else
-            Menu.CheckBox_Delivery.Enabled = false;
-            Menu.CheckBox_Delivery.Checked = false;
-#endif
-
 
             Menu.ShowDialog();
         }

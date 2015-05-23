@@ -39,9 +39,6 @@ namespace ACID
             this.Delete_Item = new System.Windows.Forms.Button();
             this.Finish_Order = new System.Windows.Forms.Button();
             this.OrderedList = new System.Windows.Forms.DataGridView();
-            this.CheckBox_Delivery = new System.Windows.Forms.CheckBox();
-            this.CheckBox_In = new System.Windows.Forms.CheckBox();
-            this.CheckBox_TA = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.Cat_Panel = new System.Windows.Forms.FlowLayoutPanel();
@@ -114,42 +111,6 @@ namespace ACID
             this.OrderedList.TabIndex = 8;
             this.OrderedList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrderedList_RowHeaderMouseDoubleClick);
             // 
-            // CheckBox_Delivery
-            // 
-            this.CheckBox_Delivery.AutoCheck = false;
-            this.CheckBox_Delivery.AutoSize = true;
-            this.CheckBox_Delivery.Checked = true;
-            this.CheckBox_Delivery.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBox_Delivery.Location = new System.Drawing.Point(22, 797);
-            this.CheckBox_Delivery.Name = "CheckBox_Delivery";
-            this.CheckBox_Delivery.Size = new System.Drawing.Size(81, 17);
-            this.CheckBox_Delivery.TabIndex = 10;
-            this.CheckBox_Delivery.Text = "خدمة توصيل";
-            this.CheckBox_Delivery.UseVisualStyleBackColor = true;
-            this.CheckBox_Delivery.CheckedChanged += new System.EventHandler(this.CheckBox_Delivery_CheckedChanged);
-            // 
-            // CheckBox_In
-            // 
-            this.CheckBox_In.AutoSize = true;
-            this.CheckBox_In.Location = new System.Drawing.Point(22, 843);
-            this.CheckBox_In.Name = "CheckBox_In";
-            this.CheckBox_In.Size = new System.Drawing.Size(47, 17);
-            this.CheckBox_In.TabIndex = 11;
-            this.CheckBox_In.Text = "صالة";
-            this.CheckBox_In.UseVisualStyleBackColor = true;
-            this.CheckBox_In.CheckedChanged += new System.EventHandler(this.CheckBox_In_CheckedChanged);
-            // 
-            // CheckBox_TA
-            // 
-            this.CheckBox_TA.AutoSize = true;
-            this.CheckBox_TA.Location = new System.Drawing.Point(22, 820);
-            this.CheckBox_TA.Name = "CheckBox_TA";
-            this.CheckBox_TA.Size = new System.Drawing.Size(67, 17);
-            this.CheckBox_TA.TabIndex = 12;
-            this.CheckBox_TA.Text = "تيك اواي";
-            this.CheckBox_TA.UseVisualStyleBackColor = true;
-            this.CheckBox_TA.CheckedChanged += new System.EventHandler(this.CheckBox_TA_CheckedChanged);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -202,9 +163,6 @@ namespace ACID
             this.ClientSize = new System.Drawing.Size(992, 868);
             this.Controls.Add(this.Cat_Panel);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.CheckBox_TA);
-            this.Controls.Add(this.CheckBox_In);
-            this.Controls.Add(this.CheckBox_Delivery);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OrderedList);
             this.Controls.Add(this.Finish_Order);
@@ -232,9 +190,6 @@ namespace ACID
         private System.Windows.Forms.Button Delete_Item;
         private System.Windows.Forms.Button Finish_Order;
         public System.Windows.Forms.DataGridView OrderedList;
-        public System.Windows.Forms.CheckBox CheckBox_Delivery;
-        public System.Windows.Forms.CheckBox CheckBox_In;
-        public System.Windows.Forms.CheckBox CheckBox_TA;
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.FlowLayoutPanel Cat_Panel;
@@ -242,5 +197,6 @@ namespace ACID
         private Order NewOrder;
         private Customer MyCustomer;
         private string UserID;
+        private string Server_Name;
     }
 }
