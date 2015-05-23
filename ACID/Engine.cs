@@ -280,25 +280,6 @@ namespace ACID
                 return;
             }
 
-            /*Update Daily Order Count*/
-            CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
-            cmd.CommandText = CmdTxt;
-
-            try
-            {
-                /* Open Command Connection */
-                myConn.Open();
-                /* Execute Command */
-                cmd.ExecuteNonQuery();
-                /* Close Connection */
-                myConn.Close();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
             /*Save Order*/
             if (!SaveOrder())
             {
