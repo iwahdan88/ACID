@@ -193,6 +193,8 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                /* Close Connection */
+                this.myConn.Close();
                 return;
             }
 
@@ -200,8 +202,55 @@ namespace ACID
             if (!SaveOrder())
             {
                 MessageBox.Show("Error Saving Order on DataBase");
+                /* Close Connection */
+                this.myConn.Close();
                 return;
             }
+
+            /*Update List of Ordered Items*/
+
+            CmdTxt = "INSERT INTO ordered_items(ItemCode, OrderID, Quantity, Price, ItemName, ItemSize, Category, OrderType) VALUES(@Code, @Order_ID, @quantity, @ItemPrice, @Name, @Size, @Cat, @Type)";
+
+            cmd.CommandText = CmdTxt;
+
+            try
+            {
+                myConn.Open();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.myConn.Close();
+            }
+
+            /* Fill Command attributes */
+
+            for (int loopIndex = 0; loopIndex < dataSet2.Tables[0].Rows.Count; loopIndex++)
+            {
+                cmd.Parameters.AddWithValue("@Code", dataSet2.Tables[1].Rows[loopIndex].ItemArray[0]);
+                cmd.Parameters.AddWithValue("@Order_ID", NewOrder.Order_GetOrderID());
+                cmd.Parameters.AddWithValue("@quantity", dataSet2.Tables[0].Rows[loopIndex].ItemArray[0]);
+                cmd.Parameters.AddWithValue("@ItemPrice", dataSet2.Tables[0].Rows[loopIndex].ItemArray[3]);
+                cmd.Parameters.AddWithValue("@Name", dataSet2.Tables[0].Rows[loopIndex].ItemArray[1]);
+                cmd.Parameters.AddWithValue("@Size", dataSet2.Tables[0].Rows[loopIndex].ItemArray[2]);
+                cmd.Parameters.AddWithValue("@Cat", dataSet2.Tables[1].Rows[loopIndex].ItemArray[1]);
+                cmd.Parameters.AddWithValue("@Type", NewOrder.Order_GetOrderType().ToString());
+
+                try
+                {
+                    /* Execute Command */
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    this.myConn.Close();
+                    break;
+                }
+            }
+
+            this.myConn.Close();
 
             PrintDocument Reciept = new PrintDocument();
             Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
@@ -426,11 +475,14 @@ namespace ACID
             String ItemPrice;
             String ItemSize;
             String count;
+            String ItemCode;
             int ItemCount = 1;
 
             ItemName = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
             ItemPrice = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[2].Value.ToString();
             ItemSize = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[1].Value.ToString();
+
+            ItemCode = this.dataSet1.Tables[CurrentTblindex].Rows[dataGridView1.SelectedRows[0].Index].ItemArray[4].ToString();
 
             DataRow[] Names = this.dataSet2.Tables[0].Select("الاسم= '" + ItemName + "' and " + "الحجم= '" + ItemSize + "'");
 
@@ -445,6 +497,8 @@ namespace ACID
            {
                 this.dataSet2.Tables[0].Rows.Add(ItemCount.ToString(), ItemName, ItemSize, ItemPrice);
            }
+
+            dataSet2.Tables[1].Rows.Add(ItemCode, this.dataSet1.Tables[CurrentTblindex].TableName);
             
         }
         private void DeleteItem()

@@ -353,11 +353,14 @@ namespace ACID
                 Menu.dataSet1.Tables[tbls].Columns.Add("الاسم", typeof(String));
                 Menu.dataSet1.Tables[tbls].Columns.Add("الحجم", typeof(String));
                 Menu.dataSet1.Tables[tbls].Columns.Add("السعر", typeof(String));
+                Menu.dataSet1.Tables[tbls].Columns.Add("الصنف", typeof(String));
+                Menu.dataSet1.Tables[tbls].Columns.Add("كود", typeof(String));
             }
             String ItemName = "";
             double ItemPrice = 0;
             String ItemSize = "";
             String CatName = "";
+            String ItemCode = "";
             int CatIndex = 0;
 
             for(int items = 0; items < TotalMenuItems; items++)
@@ -365,10 +368,11 @@ namespace ACID
                 ItemName = elemList.Item(items).ChildNodes.Item(0).InnerText;
                 ItemSize = elemList.Item(items).ChildNodes.Item(2).InnerText;
                 ItemPrice = Convert.ToDouble(elemList.Item(items).ChildNodes.Item(3).InnerText);
+                ItemCode = elemList.Item(items).ChildNodes.Item(4).InnerText;
                 CatName = elemList.Item(items).ChildNodes.Item(1).InnerText;
                 CatIndex = Menu.dataSet1.Tables.IndexOf(CatName);
                 // add row to corresponding table
-                Menu.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString() });
+                Menu.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString(),CatName, ItemCode });
             }
 
             Menu.dataGridView1.DataSource = Menu.dataSet1.Tables[0];
@@ -384,7 +388,10 @@ namespace ACID
             Menu.dataSet2.Tables[0].Columns.Add("الحجم", typeof(String));
             Menu.dataSet2.Tables[0].Columns.Add("السعر", typeof(String));
 
-            //Menu.dataSet2.Tables[0].PrimaryKey = new DataColumn[]{Menu.dataSet2.Tables[0].Columns[1]};
+            Menu.dataSet2.Tables.Add(new DataTable("Codes"));
+
+            Menu.dataSet2.Tables[1].Columns.Add("Code", typeof(String));
+            Menu.dataSet2.Tables[1].Columns.Add("Category", typeof(String));
 
             Menu.OrderedList.DataSource = Menu.dataSet2.Tables[0];
 
@@ -412,6 +419,7 @@ namespace ACID
             int TblIndex = 0;
             CatName = ((Button)sender).Text;
             TblIndex = Menu.dataSet1.Tables.IndexOf(CatName);
+            Menu.CurrentTblindex = TblIndex;
             Menu.dataGridView1.DataSource = Menu.dataSet1.Tables[TblIndex];
         }
     }

@@ -198,5 +198,6 @@ namespace ACID
         private Customer MyCustomer;
         private string UserID;
         private string Server_Name;
+        public int CurrentTblindex;
     }
 }
