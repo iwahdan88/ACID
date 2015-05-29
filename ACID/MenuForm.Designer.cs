@@ -243,5 +243,6 @@ namespace ACID
         protected System.Windows.Forms.Label CurrUserID;
         protected System.Windows.Forms.Label Server;
         protected System.Windows.Forms.Label Server_Name;
+        protected TotalSumForm TotalSumWindow;
     }
 }

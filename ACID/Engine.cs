@@ -335,6 +335,9 @@ namespace ACID
 
             this.myConn.Close();
 
+            /*Dispaly Total*/
+            DisplayTotal();
+
             PrintDocument Reciept = new PrintDocument();
             Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
             Reciept.Print();
@@ -475,7 +478,7 @@ namespace ACID
 
             cmd.Parameters.AddWithValue("@ID", NewOrder.Order_GetOrderID());
             cmd.Parameters.AddWithValue("@SubID", NewOrder.Order_GetOrderSubID());
-            cmd.Parameters.AddWithValue("@User", this.UserID);
+            cmd.Parameters.AddWithValue("@User", UserName);
             cmd.Parameters.AddWithValue("@Total", NewOrder.Order_GetOrderTotal());
 
             try
@@ -754,6 +757,17 @@ namespace ACID
             this.OrderedList.Columns[2].Width = 230;
 
             //this.ShowDialog();
+        }
+
+        private void DisplayTotal()
+        {
+            double Total;
+
+            Total = NewOrder.Order_GetOrderTotal();
+
+            this.TotalSumWindow = new TotalSumForm(Total);
+
+            this.TotalSumWindow.ShowDialog();
         }
     }
 }
