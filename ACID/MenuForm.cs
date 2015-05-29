@@ -252,15 +252,16 @@ namespace ACID
 
             this.myConn.Close();
 
+            /*Dispaly Total*/
+            DisplayTotal();
+
             PrintDocument Reciept = new PrintDocument();
             Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
             Reciept.Print();
 
+
             /* Reset Orders*/
             this.dataSet2.Tables[0].Clear();
-
-            /*Dispaly Total*/
-            DisplayTotal();
 
             this.Dispose();
         }

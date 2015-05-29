@@ -15,7 +15,7 @@ namespace ACID
         {
             this.Sum = Sum;
             InitializeComponent();
-            this.Total.Text = this.Sum.ToString();
+            this.Total.Text = this.Sum.ToString() + " L.E";
         }
 
         private void OkBtn_Click(object sender, EventArgs e)
