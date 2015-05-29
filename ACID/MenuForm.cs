@@ -259,6 +259,9 @@ namespace ACID
             /* Reset Orders*/
             this.dataSet2.Tables[0].Clear();
 
+            /*Dispaly Total*/
+            DisplayTotal();
+
             this.Dispose();
         }
         private void PrintReciept(Object sender, PrintPageEventArgs e)
@@ -596,6 +599,16 @@ namespace ACID
             }
 
             return Sum;
+        }
+        private void DisplayTotal()
+        {
+            double Total;
+
+            Total = NewOrder.Order_GetOrderTotal();
+
+            this.TotalSumWindow = new TotalSumForm(Total);
+
+            this.TotalSumWindow.ShowDialog();
         }
 
     }

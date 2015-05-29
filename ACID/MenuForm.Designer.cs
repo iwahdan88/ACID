@@ -199,5 +199,6 @@ namespace ACID
         private string UserID;
         private string Server_Name;
         public int CurrentTblindex;
+        private TotalSumForm TotalSumWindow;
     }
 }

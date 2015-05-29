@@ -130,6 +130,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TotalSumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TotalSumForm.Designer.cs">
+      <DependentUpon>TotalSumForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddCust.resx">
       <DependentUpon>AddCust.cs</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +161,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TotalSumForm.resx">
+      <DependentUpon>TotalSumForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
