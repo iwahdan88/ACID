@@ -56,5 +56,10 @@ namespace ACID
 
         }
 
+        protected virtual void EditBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

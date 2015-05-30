@@ -30,6 +30,8 @@
         {
             this.AddCustLabl = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Delivery_Charge_Label = new System.Windows.Forms.Label();
             this.Cust_Name = new System.Windows.Forms.TextBox();
             this.CustName = new System.Windows.Forms.Label();
             this.PhoneNum = new System.Windows.Forms.TextBox();
@@ -53,6 +55,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.Delivery_Charge_Label);
             this.groupBox1.Controls.Add(this.Cust_Name);
             this.groupBox1.Controls.Add(this.CustName);
             this.groupBox1.Controls.Add(this.PhoneNum);
@@ -61,18 +65,35 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(6, 108);
+            this.groupBox1.Location = new System.Drawing.Point(6, 70);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox1.Size = new System.Drawing.Size(641, 281);
+            this.groupBox1.Size = new System.Drawing.Size(641, 348);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "البيانات";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(466, 287);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(74, 26);
+            this.textBox1.TabIndex = 12;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // Delivery_Charge_Label
+            // 
+            this.Delivery_Charge_Label.AutoSize = true;
+            this.Delivery_Charge_Label.Location = new System.Drawing.Point(546, 287);
+            this.Delivery_Charge_Label.Name = "Delivery_Charge_Label";
+            this.Delivery_Charge_Label.Size = new System.Drawing.Size(92, 20);
+            this.Delivery_Charge_Label.TabIndex = 11;
+            this.Delivery_Charge_Label.Text = "تعريفة توصيل :";
+            // 
             // Cust_Name
             // 
             this.Cust_Name.BackColor = System.Drawing.Color.White;
-            this.Cust_Name.Location = new System.Drawing.Point(161, 56);
+            this.Cust_Name.Location = new System.Drawing.Point(161, 108);
             this.Cust_Name.Name = "Cust_Name";
             this.Cust_Name.Size = new System.Drawing.Size(403, 26);
             this.Cust_Name.TabIndex = 10;
@@ -82,7 +103,7 @@
             // 
             this.CustName.AutoSize = true;
             this.CustName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustName.Location = new System.Drawing.Point(589, 56);
+            this.CustName.Location = new System.Drawing.Point(589, 108);
             this.CustName.Name = "CustName";
             this.CustName.Size = new System.Drawing.Size(40, 17);
             this.CustName.TabIndex = 9;
@@ -91,7 +112,7 @@
             // PhoneNum
             // 
             this.PhoneNum.BackColor = System.Drawing.Color.White;
-            this.PhoneNum.Location = new System.Drawing.Point(357, 223);
+            this.PhoneNum.Location = new System.Drawing.Point(357, 47);
             this.PhoneNum.Name = "PhoneNum";
             this.PhoneNum.Size = new System.Drawing.Size(207, 26);
             this.PhoneNum.TabIndex = 8;
@@ -101,7 +122,7 @@
             // 
             this.l3.AutoSize = true;
             this.l3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l3.Location = new System.Drawing.Point(583, 109);
+            this.l3.Location = new System.Drawing.Point(583, 169);
             this.l3.Name = "l3";
             this.l3.Size = new System.Drawing.Size(46, 17);
             this.l3.TabIndex = 6;
@@ -110,7 +131,7 @@
             // Adresse
             // 
             this.Adresse.BackColor = System.Drawing.Color.White;
-            this.Adresse.Location = new System.Drawing.Point(67, 106);
+            this.Adresse.Location = new System.Drawing.Point(67, 169);
             this.Adresse.Multiline = true;
             this.Adresse.Name = "Adresse";
             this.Adresse.Size = new System.Drawing.Size(497, 91);
@@ -121,7 +142,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(585, 226);
+            this.label3.Location = new System.Drawing.Point(585, 50);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 7;
@@ -150,6 +171,7 @@
             this.Name = "AddCust";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddCust";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddCust_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -168,5 +190,8 @@
         protected System.Windows.Forms.TextBox Adresse;
         protected System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Add;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label Delivery_Charge_Label;
+        
     }
 }

@@ -26,6 +26,7 @@ namespace ACID
         private AddCust AddCustForm;
         public Button[] CatButtons;
         private MenuForm Menu;
+        private CustListForm CustomerForm;
         private Customer CustTobeSearched;
         private String CurrUserID;
         private String Password;
@@ -34,6 +35,7 @@ namespace ACID
         XmlDocument xmlFile;
         ProgressBar PBar;
         Thread ProgressTherad;
+        private MySqlDataAdapter Adapter;
         public Engine(String UserID, String Pass): base(UserID, Pass)
         {
             Match mymatch;
@@ -99,6 +101,7 @@ namespace ACID
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+                System.Environment.Exit(0);
             }
             Cursor.Current = Cursors.Default;
         }
@@ -111,7 +114,7 @@ namespace ACID
         }
         protected override void NewCust_Click(object sender, EventArgs e)
         {
-            Customer CustTobeAdded = new Customer("","","",0);
+            Customer CustTobeAdded = new Customer("","","",0,0);
             bool IsAddSuccess = false;
             AddCustForm = new AddCust();
             AddCustForm.ShowDialog();
@@ -147,7 +150,7 @@ namespace ACID
         {
             MySqlCommand cmd = new MySqlCommand();
             MySqlDataReader reader;
-            CustTobeSearched = new Customer("","","",0);
+            CustTobeSearched = new Customer("","","",0,0);
 
             if(conn.State == ConnectionState.Open)
             {
@@ -188,14 +191,16 @@ namespace ACID
                     Cursor.Current = Cursors.Default;
                     this.Order.Enabled = true;
                     conn.Close();
+
+                    if (CustTobeSearched.GetPhoneNum() == "")
+                    {
+                        MessageBox.Show("هذا الرقم غير مسجل");
+                    }
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
-                }
-                if (CustTobeSearched.GetPhoneNum() == "")
-                {
-                    MessageBox.Show("هذا الرقم غير مسجل");
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 }
             }
         }
@@ -225,6 +230,7 @@ namespace ACID
             catch(MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 IsOk = false;
             }
 
@@ -270,6 +276,8 @@ namespace ACID
             catch(MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                return;
             }
             Orders++;
             CmdTxt = @"UPDATE cust_info SET No_of_Orders='" + Orders + "'" + "WHERE Phone='" + this.CustNum.Text + "'";
@@ -279,11 +287,13 @@ namespace ACID
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 conn.Close();
-                //MessageBox.Show("تم تسجيل طلب بنجاح");
+                
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                return;
             }
             Cursor.Current = Cursors.Default;
 
@@ -300,8 +310,16 @@ namespace ACID
             if(xmlFile != null)
             {
                 root = xmlFile.DocumentElement;
-                elemList = root.GetElementsByTagName("MenuItem");
-                CatList = root.GetElementsByTagName("Category");
+                try
+                {
+                    elemList = root.GetElementsByTagName("MenuItem");
+                    CatList = root.GetElementsByTagName("Category");
+                }
+                catch(Exception exeption)
+                {
+                    MessageBox.Show(exeption.Message);
+                    return;
+                }
                 TotalMenuItems = elemList.Count;
                 String Temp = "";
                 ArrayList CatArrayList = new ArrayList();
@@ -421,6 +439,69 @@ namespace ACID
             TblIndex = Menu.dataSet1.Tables.IndexOf(CatName);
             Menu.CurrentTblindex = TblIndex;
             Menu.dataGridView1.DataSource = Menu.dataSet1.Tables[TblIndex];
+        }
+        protected override void EditBtn_Click(object sender, EventArgs e)
+        {
+            DataSet CustomerDataSet;
+            String CmdTxt;
+            MySqlCommand cmd = new MySqlCommand();
+            try
+            {
+                this.conn.Open();
+                Adapter = new MySqlDataAdapter("SELECT * FROM customers.cust_info;", this.conn);
+                this.conn.Close();
+            }
+            catch(Exception exep)
+            {
+                MessageBox.Show(exep.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                this.conn.Close();
+                return;
+            }
+
+            CustomerDataSet = new DataSet();
+
+            Adapter.Fill(CustomerDataSet);
+
+            if(this.PhoneNum.Text.Trim().Length > 0)
+            {
+                this.CustomerForm = new CustListForm(CustomerDataSet, this.PhoneNum.Text.Trim());
+            }
+            else
+            {
+                this.CustomerForm = new CustListForm(CustomerDataSet);
+            }
+
+            this.CustomerForm.ShowDialog();
+
+            if(this.CustomerForm.bIsSaveNeeded == true)
+            {
+                CmdTxt = @"UPDATE cust_info SET Delivery_Charge= @Delivery, Address= @Addr, Name= @name WHERE Phone= @PhoneNum;";
+          
+                cmd.CommandText = CmdTxt;
+                cmd.Connection = this.conn;
+
+                cmd.Parameters.AddWithValue("@Delivery", this.CustomerForm.CustomerToEdit.GetDeliveryCharge());
+                cmd.Parameters.AddWithValue("@Addr", this.CustomerForm.CustomerToEdit.GetAddr());
+                cmd.Parameters.AddWithValue("@name", this.CustomerForm.CustomerToEdit.GetName());
+                cmd.Parameters.AddWithValue("@PhoneNum", this.CustomerForm.CustomerToEdit.GetPhoneNum());
+                try
+                {
+                    this.conn.Open();
+                    cmd.ExecuteNonQuery();
+                    this.conn.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    this.conn.Close();
+                }
+            }
+            else
+            {
+                /*Do Nothing*/
+            }
         }
     }
 }

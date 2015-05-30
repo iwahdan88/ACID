@@ -93,6 +93,7 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 this.myConn.Close();
                 return;
             }
@@ -114,6 +115,7 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 myConn.Close();
                 return;
             }
@@ -135,6 +137,7 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 this.myConn.Close();
                 return;
             }
@@ -195,6 +198,7 @@ namespace ACID
                 MessageBox.Show(ex.Message);
                 /* Close Connection */
                 this.myConn.Close();
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 return;
             }
 
@@ -202,6 +206,7 @@ namespace ACID
             if (!SaveOrder())
             {
                 MessageBox.Show("Error Saving Order on DataBase");
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 /* Close Connection */
                 this.myConn.Close();
                 return;
@@ -220,7 +225,9 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 this.myConn.Close();
+                return;
             }
 
             /* Fill Command attributes */
@@ -245,8 +252,9 @@ namespace ACID
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                     this.myConn.Close();
-                    break;
+                    return;
                 }
             }
 

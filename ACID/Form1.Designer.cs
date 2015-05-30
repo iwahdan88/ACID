@@ -46,6 +46,7 @@
             this.Order = new System.Windows.Forms.Button();
             this.Server = new System.Windows.Forms.Label();
             this.Server_Name = new System.Windows.Forms.Label();
+            this.EditBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +95,7 @@
             // NewCust
             // 
             this.NewCust.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.NewCust.Location = new System.Drawing.Point(33, 130);
+            this.NewCust.Location = new System.Drawing.Point(35, 96);
             this.NewCust.Name = "NewCust";
             this.NewCust.Size = new System.Drawing.Size(203, 39);
             this.NewCust.TabIndex = 4;
@@ -227,11 +228,22 @@
             this.Server_Name.TabIndex = 14;
             this.Server_Name.Text = "None";
             // 
+            // EditBtn
+            // 
+            this.EditBtn.Location = new System.Drawing.Point(35, 153);
+            this.EditBtn.Name = "EditBtn";
+            this.EditBtn.Size = new System.Drawing.Size(201, 34);
+            this.EditBtn.TabIndex = 15;
+            this.EditBtn.Text = "تعديل بيانات عميل";
+            this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 575);
+            this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.Server_Name);
             this.Controls.Add(this.Server);
             this.Controls.Add(this.Order);
@@ -276,6 +288,7 @@
         protected System.Windows.Forms.Button Order;
         protected System.Windows.Forms.Label Server;
         protected System.Windows.Forms.Label Server_Name;
+        private System.Windows.Forms.Button EditBtn;
     }
 }
 

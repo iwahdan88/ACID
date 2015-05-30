@@ -12,13 +12,14 @@ namespace ACID
         private String Adresse;
         private String Name;
         private int Orders;
-
-        public Customer(String Tel, String Addr, String name, int orders)
+        private double DeliveryCharge;
+        public Customer(String Tel, String Addr, String name, int orders, double DelCharge)
         {
             PhoneNum = Tel;
             Adresse = Addr;
             Name = name;
             Orders = orders;
+            DeliveryCharge = DelCharge;
         }
         public String GetPhoneNum()
         {
@@ -31,6 +32,10 @@ namespace ACID
         public String GetName()
         {
             return Name;
+        }
+        public double GetDeliveryCharge()
+        {
+            return DeliveryCharge;
         }
         public void SetPhoneNum(String Tel)
         {
@@ -47,6 +52,10 @@ namespace ACID
         public void SetOrderCount(int Order_Cnt)
         {
             Orders = Order_Cnt;
+        }
+        public void SetDeliveryCharge(double DelCharge)
+        {
+            DeliveryCharge = DelCharge;
         }
         public int GetOrderCount()
         {
