@@ -161,10 +161,18 @@ namespace ACID
 
             NewOrder.Order_SetOrderID(OrderID);
             NewOrder.Order_SetOrderSubID(SubOrderNo);
-            NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
             NewOrder.Order_SetTimestmp(NewDate.ToString());
             NewOrder.Order_SetCustAddr(this.MyCustomer.GetAddr());
             NewOrder.Order_SetCustTel(this.MyCustomer.GetPhoneNum());
+            if(this.MyCustomer.GetDeliveryCharge() == null)
+            {
+                NewOrder.Order_SetDeliveryCharge(0);
+            }
+            else
+            {
+                NewOrder.Order_SetDeliveryCharge(this.MyCustomer.GetDeliveryCharge());
+            }
+            NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
 
             if (System.DateTime.Now.CompareTo(LastOrderDate) < 0)
             {
@@ -606,6 +614,8 @@ namespace ACID
             {
                 Sum = Sum + ((Convert.ToInt32(this.dataSet2.Tables[0].Rows[i].ItemArray[0])) * (Convert.ToDouble(this.dataSet2.Tables[0].Rows[i].ItemArray[3])));
             }
+
+            Sum += +NewOrder.Order_GetDeliveryCharge();
 
             return Sum;
         }

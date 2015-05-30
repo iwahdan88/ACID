@@ -184,6 +184,7 @@ namespace ACID
                         CustTobeSearched.SetAddr(reader.GetString("Address"));
                         CustTobeSearched.SetOrderCount(reader.GetInt32("No_of_Orders"));
                         CustTobeSearched.SetPhoneNum(reader.GetString("Phone"));
+                        CustTobeSearched.SetDeliveryCharge(reader.GetDouble("Delivery_Charge"));
                     }
                     this.Cust_Name.Text = CustTobeSearched.GetName();
                     this.Adresse.Text = CustTobeSearched.GetAddr();
@@ -497,6 +498,15 @@ namespace ACID
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                     this.conn.Close();
                 }
+
+                // Clear Fields (To Reload Delivery charge if changed in the contents of the Customer to be sent to MenuForm)
+
+                this.Cust_Name.Text = "";
+                this.Adresse.Text = "";
+                this.PhoneNum.Text = "";
+                this.CustNum.Text = "";
+
+                this.Order.Enabled = false;
             }
             else
             {

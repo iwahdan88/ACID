@@ -16,7 +16,7 @@ namespace ACID
         private String Cust_Adrress;
         private int OrderID;
         private int OrderSubID;
-        private const double Delivery_Charge = 0.0;
+        private double Delivery_Charge;
         private int table_no;
 
         public Order(OrderTypes typ)
@@ -29,6 +29,7 @@ namespace ACID
             OrderID = 0;
             OrderSubID = 0;
             table_no = 0;
+            Delivery_Charge = 0;
         }
         public bool Order_SetCustTel(String Tel)
         {
@@ -81,6 +82,10 @@ namespace ACID
             {
                 return false;
             }
+        }
+        public void Order_SetDeliveryCharge(double Charge)
+        {
+           Delivery_Charge = Charge;
         }
         public String Order_GetCustTel()
         {
