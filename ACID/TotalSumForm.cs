@@ -16,10 +16,12 @@ namespace ACID
             this.Sum = Sum;
             InitializeComponent();
             this.Total.Text = this.Sum.ToString() + " L.E";
+            this.bIsAbbort = true;
         }
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
+            this.bIsAbbort = false;
             this.Dispose();
         }
     }

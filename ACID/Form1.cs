@@ -61,5 +61,10 @@ namespace ACID
 
         }
 
+        protected virtual void Btn_Order_Cancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

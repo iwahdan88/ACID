@@ -47,6 +47,7 @@
             this.Server = new System.Windows.Forms.Label();
             this.Server_Name = new System.Windows.Forms.Label();
             this.EditBtn = new System.Windows.Forms.Button();
+            this.Btn_Order_Cancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,7 +98,7 @@
             this.NewCust.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.NewCust.Location = new System.Drawing.Point(35, 96);
             this.NewCust.Name = "NewCust";
-            this.NewCust.Size = new System.Drawing.Size(203, 39);
+            this.NewCust.Size = new System.Drawing.Size(167, 27);
             this.NewCust.TabIndex = 4;
             this.NewCust.Text = "تسجيل عميل جديد ";
             this.NewCust.UseVisualStyleBackColor = true;
@@ -230,19 +231,30 @@
             // 
             // EditBtn
             // 
-            this.EditBtn.Location = new System.Drawing.Point(35, 153);
+            this.EditBtn.Location = new System.Drawing.Point(35, 130);
             this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(201, 34);
+            this.EditBtn.Size = new System.Drawing.Size(167, 27);
             this.EditBtn.TabIndex = 15;
             this.EditBtn.Text = "تعديل بيانات عميل";
             this.EditBtn.UseVisualStyleBackColor = true;
             this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+            // 
+            // Btn_Order_Cancel
+            // 
+            this.Btn_Order_Cancel.Location = new System.Drawing.Point(35, 163);
+            this.Btn_Order_Cancel.Name = "Btn_Order_Cancel";
+            this.Btn_Order_Cancel.Size = new System.Drawing.Size(167, 26);
+            this.Btn_Order_Cancel.TabIndex = 16;
+            this.Btn_Order_Cancel.Text = "الغاء طلب";
+            this.Btn_Order_Cancel.UseVisualStyleBackColor = true;
+            this.Btn_Order_Cancel.Click += new System.EventHandler(this.Btn_Order_Cancel_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 575);
+            this.Controls.Add(this.Btn_Order_Cancel);
             this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.Server_Name);
             this.Controls.Add(this.Server);
@@ -289,6 +301,7 @@
         protected System.Windows.Forms.Label Server;
         protected System.Windows.Forms.Label Server_Name;
         private System.Windows.Forms.Button EditBtn;
+        private System.Windows.Forms.Button Btn_Order_Cancel;
     }
 }
 

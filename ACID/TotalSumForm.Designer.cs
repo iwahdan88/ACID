@@ -86,5 +86,6 @@
         private System.Windows.Forms.Label Total;
         private double Sum;
         private System.Windows.Forms.Button OkBtn;
+        public bool bIsAbbort;
     }
 }

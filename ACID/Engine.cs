@@ -31,6 +31,7 @@ namespace ACID
         private String CurrUserID;
         private String Password;
         private String Server;
+        private OrderCancelForm CancelForm;
         /*Start Menu */
         XmlDocument xmlFile;
         ProgressBar PBar;
@@ -83,7 +84,6 @@ namespace ACID
                 conn.Open();
 
                 conn.Close();
-                ProgressTherad.Abort();
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
@@ -95,7 +95,8 @@ namespace ACID
             /*Get Menu Data*/
             try
             {
-                xmlFile.Load(@"http://storage.googleapis.com/menudata/MenuItems.xml");
+                xmlFile.Load(@"https://storage-download.googleapis.com/menudata/MenuItems.xml");
+                ProgressTherad.Abort();
 
             }
             catch (Exception exp)
@@ -511,6 +512,75 @@ namespace ACID
             else
             {
                 /*Do Nothing*/
+            }
+        }
+        protected override void Btn_Order_Cancel_Click(object sender, EventArgs e)
+        {
+            String CmdTxt;
+            String OrderID;
+            MySqlDataReader reader;
+            bool IsOrderExist = false;
+            MySqlCommand cmd = new MySqlCommand();
+
+            this.CancelForm = new OrderCancelForm();
+            this.CancelForm.ShowDialog();
+            if(this.CancelForm.bIsCancelAccepted == true)
+            {
+                myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
+                "pwd=" + Password + ";" + "database=orders;";
+
+                conn.ConnectionString = myConnectionString;
+
+                OrderID = this.CancelForm.OrderID;
+
+                CmdTxt = @"SELECT * FROM delivery_orders WHERE OrderID =" + OrderID + ";";
+
+                cmd.CommandText = CmdTxt;
+                cmd.Connection = this.conn;
+
+                try
+                {
+                    this.conn.Open();
+                    reader = cmd.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        IsOrderExist = true;
+                    }
+                    this.conn.Close();
+                }
+                catch (MySqlException exp2)
+                {
+                    MessageBox.Show(exp2.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    this.conn.Close();
+                    return;
+                }
+
+                CmdTxt = @"UPDATE delivery_orders SET OrderCancel= b'1', OrderTotal= '0' WHERE OrderID ="+ OrderID+";";
+
+                cmd.CommandText = CmdTxt;
+
+                try
+                {
+                    this.conn.Open();
+                    cmd.ExecuteNonQuery();
+                    this.conn.Close();
+                    if (IsOrderExist == true)
+                    {
+                        MessageBox.Show("تم الغاء الطلب رقم : " + "  " + OrderID + "  " + "بنجاح");
+                    }
+                    else
+                    {
+                        MessageBox.Show("الطلب رقم : " + "  " + OrderID + "  " + "غير موجود في قاعدة البيانات");
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    this.conn.Close();
+                }
+
             }
         }
     }

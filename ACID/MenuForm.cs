@@ -65,197 +65,42 @@ namespace ACID
             DateTime LastOrderDate = new DateTime();
             String Date;
 
-            String ChangeTimeZone = "SET @@session.time_zone='+02:00';";
-
-            if (this.Server_Name == "Remote")
-            {
-                CmdTxt = ChangeTimeZone + "\n" + "SELECT current_timestamp()";
-            }
-            else
-            {
-                CmdTxt = "SELECT current_timestamp()";
-            }
-
-            cmd.Connection = this.myConn;
-            cmd.CommandText = CmdTxt;
-
-            try
-            {
-                this.myConn.Open();
-                reader = cmd.ExecuteReader();
-                Cursor.Current = Cursors.WaitCursor;
-                while (reader.Read())
-                {
-                    NewDate = reader.GetDateTime("current_timestamp()");
-                }
-                this.myConn.Close();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                this.myConn.Close();
-                return;
-            }
-
-            CmdTxt = "SELECT * FROM order_count;";
-            cmd.CommandText = CmdTxt;
-
-            try
-            {
-                myConn.Open();
-                reader = cmd.ExecuteReader();
-                Cursor.Current = Cursors.WaitCursor;
-                while (reader.Read())
-                {
-                    SubOrderNo = reader.GetInt32("OrderCount");
-                }
-                myConn.Close();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                myConn.Close();
-                return;
-            }
-
-            CmdTxt = "SELECT * FROM order_count";
-            cmd.CommandText = CmdTxt;
-
-            try
-            {
-                this.myConn.Open();
-                reader = cmd.ExecuteReader();
-                Cursor.Current = Cursors.WaitCursor;
-                while (reader.Read())
-                {
-                    LastOrderDate = reader.GetDateTime("DateTime");
-                }
-                this.myConn.Close();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                this.myConn.Close();
-                return;
-            }
-
             NewOrder = new Order(OrderTypes.Delivery);
-
-            SubOrderNo++;
-
-            Date = ((LastOrderDate.Date.ToString()).Split(new char[] { ' ' }))[0];
-
-            if (Date != ((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0])
-            {
-                /*Reset Sub ID*/
-                SubOrderNo = 1;
-                OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
-            }
-            else
-            {
-                OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
-            }
-
-            NewOrder.Order_SetOrderID(OrderID);
-            NewOrder.Order_SetOrderSubID(SubOrderNo);
-            NewOrder.Order_SetTimestmp(NewDate.ToString());
-            NewOrder.Order_SetCustAddr(this.MyCustomer.GetAddr());
-            NewOrder.Order_SetCustTel(this.MyCustomer.GetPhoneNum());
-            if(this.MyCustomer.GetDeliveryCharge() == null)
-            {
-                NewOrder.Order_SetDeliveryCharge(0);
-            }
-            else
-            {
-                NewOrder.Order_SetDeliveryCharge(this.MyCustomer.GetDeliveryCharge());
-            }
+            /* Compute Order Total */
             NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
 
-            if (System.DateTime.Now.CompareTo(LastOrderDate) < 0)
+            /*Dispaly Total*/
+            if (!DisplayTotal())
             {
-                MessageBox.Show("You Cannot Save Order at Time earlier than the most recent one on DataBase");
-                return;
-            }
-            /*Update Daily Order Count*/
-
-            if (this.Server_Name == "Remote")
-            {
-                CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                /* Reset Orders*/
+                this.dataSet2.Tables[0].Clear();
             }
             else
             {
-                CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
-            }
+                String ChangeTimeZone = "SET @@session.time_zone='+02:00';";
 
-            cmd.CommandText = CmdTxt;
+                if (this.Server_Name == "Remote")
+                {
+                    CmdTxt = ChangeTimeZone + "\n" + "SELECT current_timestamp()";
+                }
+                else
+                {
+                    CmdTxt = "SELECT current_timestamp()";
+                }
 
-            try
-            {
-                /* Open Command Connection */
-                this.myConn.Open();
-                /* Execute Command */
-                cmd.ExecuteNonQuery();
-                /* Close Connection */
-                this.myConn.Close();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                /* Close Connection */
-                this.myConn.Close();
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                return;
-            }
-
-            /*Save Order*/
-            if (!SaveOrder())
-            {
-                MessageBox.Show("Error Saving Order on DataBase");
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                /* Close Connection */
-                this.myConn.Close();
-                return;
-            }
-
-            /*Update List of Ordered Items*/
-
-            CmdTxt = "INSERT INTO ordered_items(ItemCode, OrderID, Quantity, Price, ItemName, ItemSize, Category, OrderType) VALUES(@Code, @Order_ID, @quantity, @ItemPrice, @Name, @Size, @Cat, @Type)";
-
-            cmd.CommandText = CmdTxt;
-
-            try
-            {
-                myConn.Open();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                this.myConn.Close();
-                return;
-            }
-
-            /* Fill Command attributes */
-
-            for (int loopIndex = 0; loopIndex < dataSet2.Tables[0].Rows.Count; loopIndex++)
-            {
-                cmd.Parameters.AddWithValue("@Code", dataSet2.Tables[1].Rows[loopIndex].ItemArray[0]);
-                cmd.Parameters.AddWithValue("@Order_ID", NewOrder.Order_GetOrderID());
-                cmd.Parameters.AddWithValue("@quantity", dataSet2.Tables[0].Rows[loopIndex].ItemArray[0]);
-                cmd.Parameters.AddWithValue("@ItemPrice", dataSet2.Tables[0].Rows[loopIndex].ItemArray[3]);
-                cmd.Parameters.AddWithValue("@Name", dataSet2.Tables[0].Rows[loopIndex].ItemArray[1]);
-                cmd.Parameters.AddWithValue("@Size", dataSet2.Tables[0].Rows[loopIndex].ItemArray[2]);
-                cmd.Parameters.AddWithValue("@Cat", dataSet2.Tables[1].Rows[loopIndex].ItemArray[1]);
-                cmd.Parameters.AddWithValue("@Type", NewOrder.Order_GetOrderType().ToString());
+                cmd.Connection = this.myConn;
+                cmd.CommandText = CmdTxt;
 
                 try
                 {
-                    /* Execute Command */
-                    cmd.ExecuteNonQuery();
-                    cmd.Parameters.Clear();
+                    this.myConn.Open();
+                    reader = cmd.ExecuteReader();
+                    Cursor.Current = Cursors.WaitCursor;
+                    while (reader.Read())
+                    {
+                        NewDate = reader.GetDateTime("current_timestamp()");
+                    }
+                    this.myConn.Close();
                 }
                 catch (MySqlException ex)
                 {
@@ -264,22 +109,186 @@ namespace ACID
                     this.myConn.Close();
                     return;
                 }
+
+                CmdTxt = "SELECT * FROM order_count;";
+                cmd.CommandText = CmdTxt;
+
+                try
+                {
+                    myConn.Open();
+                    reader = cmd.ExecuteReader();
+                    Cursor.Current = Cursors.WaitCursor;
+                    while (reader.Read())
+                    {
+                        SubOrderNo = reader.GetInt32("OrderCount");
+                    }
+                    myConn.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    myConn.Close();
+                    return;
+                }
+
+                CmdTxt = "SELECT * FROM order_count";
+                cmd.CommandText = CmdTxt;
+
+                try
+                {
+                    this.myConn.Open();
+                    reader = cmd.ExecuteReader();
+                    Cursor.Current = Cursors.WaitCursor;
+                    while (reader.Read())
+                    {
+                        LastOrderDate = reader.GetDateTime("DateTime");
+                    }
+                    this.myConn.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    this.myConn.Close();
+                    return;
+                }
+
+                /*NewOrder = new Order(OrderTypes.Delivery);*/
+
+                SubOrderNo++;
+
+                Date = ((LastOrderDate.Date.ToString()).Split(new char[] { ' ' }))[0];
+
+                if (Date != ((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0])
+                {
+                    /*Reset Sub ID*/
+                    SubOrderNo = 1;
+                    OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
+                }
+                else
+                {
+                    OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
+                }
+
+                NewOrder.Order_SetOrderID(OrderID);
+                NewOrder.Order_SetOrderSubID(SubOrderNo);
+                NewOrder.Order_SetTimestmp(NewDate.ToString());
+                NewOrder.Order_SetCustAddr(this.MyCustomer.GetAddr());
+                NewOrder.Order_SetCustTel(this.MyCustomer.GetPhoneNum());
+                if (this.MyCustomer.GetDeliveryCharge() == null)
+                {
+                    NewOrder.Order_SetDeliveryCharge(0);
+                }
+                else
+                {
+                    NewOrder.Order_SetDeliveryCharge(this.MyCustomer.GetDeliveryCharge());
+                }
+                /*NewOrder.Order_SetOrderTotal(GetTotalOrderValue());*/
+
+                if (System.DateTime.Now.CompareTo(LastOrderDate) < 0)
+                {
+                    MessageBox.Show("You Cannot Save Order at Time earlier than the most recent one on DataBase");
+                    return;
+                }
+                /*Update Daily Order Count*/
+
+                if (this.Server_Name == "Remote")
+                {
+                    CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                }
+                else
+                {
+                    CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                }
+
+                cmd.CommandText = CmdTxt;
+
+                try
+                {
+                    /* Open Command Connection */
+                    this.myConn.Open();
+                    /* Execute Command */
+                    cmd.ExecuteNonQuery();
+                    /* Close Connection */
+                    this.myConn.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    /* Close Connection */
+                    this.myConn.Close();
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    return;
+                }
+
+                /*Save Order*/
+                if (!SaveOrder())
+                {
+                    MessageBox.Show("Error Saving Order on DataBase");
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    /* Close Connection */
+                    this.myConn.Close();
+                    return;
+                }
+
+                /*Update List of Ordered Items*/
+
+                CmdTxt = "INSERT INTO ordered_items(ItemCode, OrderID, Quantity, Price, ItemName, ItemSize, Category, OrderType) VALUES(@Code, @Order_ID, @quantity, @ItemPrice, @Name, @Size, @Cat, @Type)";
+
+                cmd.CommandText = CmdTxt;
+
+                try
+                {
+                    myConn.Open();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                    this.myConn.Close();
+                    return;
+                }
+
+                /* Fill Command attributes */
+
+                for (int loopIndex = 0; loopIndex < dataSet2.Tables[0].Rows.Count; loopIndex++)
+                {
+                    cmd.Parameters.AddWithValue("@Code", dataSet2.Tables[1].Rows[loopIndex].ItemArray[0]);
+                    cmd.Parameters.AddWithValue("@Order_ID", NewOrder.Order_GetOrderID());
+                    cmd.Parameters.AddWithValue("@quantity", dataSet2.Tables[0].Rows[loopIndex].ItemArray[0]);
+                    cmd.Parameters.AddWithValue("@ItemPrice", dataSet2.Tables[0].Rows[loopIndex].ItemArray[3]);
+                    cmd.Parameters.AddWithValue("@Name", dataSet2.Tables[0].Rows[loopIndex].ItemArray[1]);
+                    cmd.Parameters.AddWithValue("@Size", dataSet2.Tables[0].Rows[loopIndex].ItemArray[2]);
+                    cmd.Parameters.AddWithValue("@Cat", dataSet2.Tables[1].Rows[loopIndex].ItemArray[1]);
+                    cmd.Parameters.AddWithValue("@Type", NewOrder.Order_GetOrderType().ToString());
+
+                    try
+                    {
+                        /* Execute Command */
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                        this.myConn.Close();
+                        return;
+                    }
+                }
+
+                this.myConn.Close();
+
+                PrintDocument Reciept = new PrintDocument();
+                Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
+                Reciept.Print();
+
+                /* Reset Orders*/
+                this.dataSet2.Tables[0].Clear();
+
+                this.Dispose();
             }
-
-            this.myConn.Close();
-
-            /*Dispaly Total*/
-            DisplayTotal();
-
-            PrintDocument Reciept = new PrintDocument();
-            Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
-            Reciept.Print();
-
-
-            /* Reset Orders*/
-            this.dataSet2.Tables[0].Clear();
-
-            this.Dispose();
         }
         private void PrintReciept(Object sender, PrintPageEventArgs e)
         {
@@ -619,8 +628,9 @@ namespace ACID
 
             return Sum;
         }
-        private void DisplayTotal()
+        private bool DisplayTotal()
         {
+            bool bIsAccepet = true;
             double Total;
 
             Total = NewOrder.Order_GetOrderTotal();
@@ -628,7 +638,11 @@ namespace ACID
             this.TotalSumWindow = new TotalSumForm(Total);
 
             this.TotalSumWindow.ShowDialog();
+            if(this.TotalSumWindow.bIsAbbort == true)
+            {
+                bIsAccepet = false;
+            }
+            return bIsAccepet;
         }
-
     }
 }
