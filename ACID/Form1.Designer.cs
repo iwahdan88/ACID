@@ -48,7 +48,12 @@
             this.Server_Name = new System.Windows.Forms.Label();
             this.EditBtn = new System.Windows.Forms.Button();
             this.Btn_Order_Cancel = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modemSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -184,7 +189,7 @@
             // CurrUser
             // 
             this.CurrUser.AutoSize = true;
-            this.CurrUser.Location = new System.Drawing.Point(15, 19);
+            this.CurrUser.Location = new System.Drawing.Point(19, 43);
             this.CurrUser.Name = "CurrUser";
             this.CurrUser.Size = new System.Drawing.Size(46, 13);
             this.CurrUser.TabIndex = 10;
@@ -194,7 +199,7 @@
             // 
             this.UserName.AutoSize = true;
             this.UserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserName.Location = new System.Drawing.Point(77, 17);
+            this.UserName.Location = new System.Drawing.Point(75, 39);
             this.UserName.Name = "UserName";
             this.UserName.Size = new System.Drawing.Size(0, 17);
             this.UserName.TabIndex = 11;
@@ -214,7 +219,7 @@
             // Server
             // 
             this.Server.AutoSize = true;
-            this.Server.Location = new System.Drawing.Point(15, 57);
+            this.Server.Location = new System.Drawing.Point(19, 69);
             this.Server.Name = "Server";
             this.Server.Size = new System.Drawing.Size(41, 13);
             this.Server.TabIndex = 13;
@@ -223,7 +228,7 @@
             // Server_Name
             // 
             this.Server_Name.AutoSize = true;
-            this.Server_Name.Location = new System.Drawing.Point(71, 56);
+            this.Server_Name.Location = new System.Drawing.Point(75, 68);
             this.Server_Name.Name = "Server_Name";
             this.Server_Name.Size = new System.Drawing.Size(33, 13);
             this.Server_Name.TabIndex = 14;
@@ -249,11 +254,44 @@
             this.Btn_Order_Cancel.UseVisualStyleBackColor = true;
             this.Btn_Order_Cancel.Click += new System.EventHandler(this.Btn_Order_Cancel_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(721, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modemSettingsToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // modemSettingsToolStripMenuItem
+            // 
+            this.modemSettingsToolStripMenuItem.Name = "modemSettingsToolStripMenuItem";
+            this.modemSettingsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.modemSettingsToolStripMenuItem.Text = "Modem Settings";
+            this.modemSettingsToolStripMenuItem.Click += new System.EventHandler(this.modemSettingsToolStripMenuItem_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(551, 40);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(117, 20);
+            this.textBox1.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 575);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Btn_Order_Cancel);
             this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.Server_Name);
@@ -267,6 +305,7 @@
             this.Controls.Add(this.CustNum);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -276,6 +315,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,6 +343,10 @@
         protected System.Windows.Forms.Label Server_Name;
         private System.Windows.Forms.Button EditBtn;
         private System.Windows.Forms.Button Btn_Order_Cancel;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modemSettingsToolStripMenuItem;
+        protected System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -64,6 +64,7 @@ namespace ACID
             int SubOrderNo = 0, OrderID;
             DateTime LastOrderDate = new DateTime();
             String Date;
+            bool bIsOneOrder = false;
 
             NewOrder = new Order(OrderTypes.Delivery);
             /* Compute Order Total */
@@ -162,6 +163,11 @@ namespace ACID
 
                 if (Date != ((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0])
                 {
+                    /* Only 1 Order happen in last day*/
+                    if(SubOrderNo == 2)
+                    {
+                        bIsOneOrder = true;
+                    }
                     /*Reset Sub ID*/
                     SubOrderNo = 1;
                     OrderID = ConverToID(((NewDate.Date.ToString()).Split(new char[] { ' ' }))[0], SubOrderNo);
@@ -195,11 +201,25 @@ namespace ACID
 
                 if (this.Server_Name == "Remote")
                 {
-                    CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                    if (bIsOneOrder == true)
+                    {
+                        CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "', DateTime= '" + NewDate+"'" + " WHERE Row =0" + ";";
+                    }
+                    else
+                    {
+                        CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                    }
                 }
                 else
                 {
-                    CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                    if (bIsOneOrder == true)
+                    {
+                        CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "', DateTime= '" + NewDate +"'" + " WHERE Row =0" + ";";
+                    }
+                    else
+                    {
+                        CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
+                    }
                 }
 
                 cmd.CommandText = CmdTxt;

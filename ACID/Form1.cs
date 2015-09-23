@@ -66,5 +66,10 @@ namespace ACID
 
         }
 
+        protected virtual void modemSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

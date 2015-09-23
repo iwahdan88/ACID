@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Drawing;
 using System.Threading;
+using  System.IO.Ports;
 
 namespace ACID
 {
@@ -32,6 +33,12 @@ namespace ACID
         private String Password;
         private String Server;
         private OrderCancelForm CancelForm;
+        private SettingsForm SettingsForm;
+        private string CommPort;
+        private string baudRate;
+        private string initString;
+        private SerialPort MySerialComm;
+        delegate void SetTextCallback(string text);
         /*Start Menu */
         XmlDocument xmlFile;
         ProgressBar PBar;
@@ -46,6 +53,9 @@ namespace ACID
             CurrUserID = UserID;
             Password = Pass;
             PBar = new ProgressBar();
+            CommPort = "";
+            baudRate = "";
+            initString = "";
             ProgressTherad = new Thread(PBar.Start);
             try
             {
@@ -95,16 +105,64 @@ namespace ACID
             /*Get Menu Data*/
             try
             {
+               // xmlFile.Load(@"C:\Users\islam\Documents\Visual Studio 2013\Projects\ACID\MenuItems.xml");
                 xmlFile.Load(@"https://storage-download.googleapis.com/menudata/MenuItems.xml");
+
                 ProgressTherad.Abort();
 
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
-                System.Environment.Exit(0);
+                try
+                {
+                    xmlFile.Load(@"./MenuItems.xml");
+                    ProgressTherad.Abort();
+                }
+                catch (Exception ee)
+                {
+                    MessageBox.Show(ee.Message);
+                    ProgressTherad.Abort();
+                    System.Environment.Exit(0);
+                }
+            }
+            try
+            {
+                /*Read Comm settings from local file*/
+                String[] CommSettings = System.IO.File.ReadAllLines(@"./modem.txt");
+
+                CommPort = CommSettings[0];
+                baudRate = CommSettings[1];
+                initString = CommSettings[2];
+            }
+            catch(Exception ex)
+            {
+                SettingsForm = new SettingsForm();
+                SettingsForm.ShowDialog();
+                CommPort = SettingsForm.PortName ;
+                try
+                {
+                    baudRate = Convert.ToString(SettingsForm.baudRate);
+                }
+                catch(Exception ee)
+                {
+                    baudRate = "152200";
+                }
+                initString = SettingsForm.InitString;
             }
             Cursor.Current = Cursors.Default;
+
+            MySerialComm = new SerialPort(CommPort, Convert.ToInt32(baudRate));
+            MySerialComm.DataReceived += new SerialDataReceivedEventHandler(DataRecievedOnPort);
+
+            try
+            {
+                MySerialComm.Open();
+            }
+            catch(Exception CommEx)
+            {
+                MessageBox.Show(CommEx.Message);
+            }
         }
 
 
@@ -248,6 +306,14 @@ namespace ACID
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            try
+            {
+                MySerialComm.Close();
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
         }
         protected override void Order_Click(object sender, EventArgs e)
@@ -581,6 +647,38 @@ namespace ACID
                     this.conn.Close();
                 }
 
+            }
+        }
+        protected override void modemSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsForm = new SettingsForm();
+            SettingsForm.ShowDialog();
+        }
+        public void DataRecievedOnPort(Object sender, SerialDataReceivedEventArgs e)
+        {
+            SetText(MySerialComm.ReadExisting().ToString());
+        }
+        private void SetText(string text)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.textBox1.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                Match mymatch;
+                object sender = new object();
+                EventArgs e = new EventArgs();
+                mymatch = Regex.Match(text, @"NMBR\s*\=\s*([0-9\.]+)");
+                if (mymatch.Groups.Count > 0)
+                {
+                    this.textBox1.Text = text.Substring(5);
+                    Search_Click(sender, (EventArgs)e);
+                }
             }
         }
     }
