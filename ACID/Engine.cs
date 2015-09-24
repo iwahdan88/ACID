@@ -56,6 +56,7 @@ namespace ACID
             CommPort = "";
             baudRate = "";
             initString = "";
+            this.LEDBox.Hide();
             ProgressTherad = new Thread(PBar.Start);
             try
             {
@@ -95,9 +96,10 @@ namespace ACID
 
                 conn.Close();
             }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                ProgressTherad.Abort();
                 System.Environment.Exit(0);
             }
 
@@ -107,7 +109,8 @@ namespace ACID
             {
                // xmlFile.Load(@"C:\Users\islam\Documents\Visual Studio 2013\Projects\ACID\MenuItems.xml");
                 xmlFile.Load(@"https://storage-download.googleapis.com/menudata/MenuItems.xml");
-
+                xmlFile.Save(@"./Backup/MenuItems.xml");
+                //File.WriteAllText(@"./Backup/MenuItems.xml", XmlDoc);
                 ProgressTherad.Abort();
 
             }
@@ -116,7 +119,7 @@ namespace ACID
                 MessageBox.Show(exp.Message);
                 try
                 {
-                    xmlFile.Load(@"./MenuItems.xml");
+                    xmlFile.Load(@"./Backup/MenuItems.xml");
                     ProgressTherad.Abort();
                 }
                 catch (Exception ee)
@@ -162,6 +165,10 @@ namespace ACID
             catch(Exception CommEx)
             {
                 MessageBox.Show(CommEx.Message);
+            }
+            if(initString == "")
+            {
+                initString = "AT";
             }
         }
 
@@ -669,15 +676,20 @@ namespace ACID
         }
         public void DataRecievedOnPort(Object sender, SerialDataReceivedEventArgs e)
         {
-            SetText(MySerialComm.ReadLine().ToString());
+            if(!this.IsDisposed)
+            {
+               // Thread.Sleep(20);
+                SetText(MySerialComm.ReadLine().ToString());
+            }
         }
         private void SetText(string text)
         {
             string mtch;
+            string mtch2;
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
-            if (this.CustNum.InvokeRequired)
+            if ((this.CustNum.InvokeRequired) || (this.LEDBox.InvokeRequired))
             {
                 SetTextCallback d = new SetTextCallback(SetText);
                 this.Invoke(d, new object[] { text });
@@ -685,15 +697,37 @@ namespace ACID
             else
             {
                 Match mymatch;
+                Match mymatch2;
                 object sender = new object();
                 EventArgs e = new EventArgs();
                 mymatch = Regex.Match(text, @"NMBR\s*\=\s*([0-9\.]+)");
+                mymatch2 = Regex.Match(text, @"^\s*OK[\\r\\n]*\s*");
+                mtch2 = mymatch2.ToString();
                 if (mymatch.Groups.Count >= 2)
                 {
                     mtch = mymatch.ToString();
                     this.CustNum.Text = mtch.Substring(7);
                     Search_Click(sender, (EventArgs)e);
                 }
+                else if (mtch2 != "")
+                {
+                    mtch2 = mtch2.Substring(0, 2);
+                    if(mtch2 == "OK")
+                    {
+                        this.LEDBox.Visible = true;
+                    }
+                }
+            }
+        }
+        protected override void TestModemBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MySerialComm.WriteLine(initString + Environment.NewLine);
+            }
+            catch (Exception Commex)
+            {
+                MessageBox.Show(Commex.Message);
             }
         }
     }

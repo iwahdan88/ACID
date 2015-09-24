@@ -51,8 +51,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modemSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ModemLabel = new System.Windows.Forms.Label();
+            this.LEDBox = new System.Windows.Forms.PictureBox();
+            this.TestModemBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LEDBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +74,7 @@
             // CustNum
             // 
             this.CustNum.Location = new System.Drawing.Point(641, 174);
-            this.CustNum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CustNum.Margin = new System.Windows.Forms.Padding(4);
             this.CustNum.Name = "CustNum";
             this.CustNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.CustNum.Size = new System.Drawing.Size(247, 22);
@@ -82,7 +86,7 @@
             // 
             this.Search.Enabled = false;
             this.Search.Location = new System.Drawing.Point(396, 170);
-            this.Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Search.Margin = new System.Windows.Forms.Padding(4);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(184, 28);
             this.Search.TabIndex = 2;
@@ -105,7 +109,7 @@
             // 
             this.NewCust.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.NewCust.Location = new System.Drawing.Point(47, 118);
-            this.NewCust.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NewCust.Margin = new System.Windows.Forms.Padding(4);
             this.NewCust.Name = "NewCust";
             this.NewCust.Size = new System.Drawing.Size(223, 33);
             this.NewCust.TabIndex = 4;
@@ -118,7 +122,7 @@
             this.Adresse.BackColor = System.Drawing.Color.White;
             this.Adresse.Enabled = false;
             this.Adresse.Location = new System.Drawing.Point(88, 154);
-            this.Adresse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Adresse.Margin = new System.Windows.Forms.Padding(4);
             this.Adresse.Multiline = true;
             this.Adresse.Name = "Adresse";
             this.Adresse.Size = new System.Drawing.Size(661, 89);
@@ -151,7 +155,7 @@
             this.PhoneNum.BackColor = System.Drawing.Color.White;
             this.PhoneNum.Enabled = false;
             this.PhoneNum.Location = new System.Drawing.Point(475, 283);
-            this.PhoneNum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PhoneNum.Margin = new System.Windows.Forms.Padding(4);
             this.PhoneNum.Name = "PhoneNum";
             this.PhoneNum.Size = new System.Drawing.Size(275, 30);
             this.PhoneNum.TabIndex = 8;
@@ -168,9 +172,9 @@
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(35, 241);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.groupBox1.Size = new System.Drawing.Size(855, 346);
             this.groupBox1.TabIndex = 9;
@@ -182,7 +186,7 @@
             this.Cust_Name.BackColor = System.Drawing.Color.White;
             this.Cust_Name.Enabled = false;
             this.Cust_Name.Location = new System.Drawing.Point(213, 80);
-            this.Cust_Name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cust_Name.Margin = new System.Windows.Forms.Padding(4);
             this.Cust_Name.Name = "Cust_Name";
             this.Cust_Name.Size = new System.Drawing.Size(536, 30);
             this.Cust_Name.TabIndex = 10;
@@ -223,7 +227,7 @@
             this.Order.BackColor = System.Drawing.SystemColors.Control;
             this.Order.Enabled = false;
             this.Order.Location = new System.Drawing.Point(395, 631);
-            this.Order.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Order.Margin = new System.Windows.Forms.Padding(4);
             this.Order.Name = "Order";
             this.Order.Size = new System.Drawing.Size(185, 47);
             this.Order.TabIndex = 12;
@@ -254,7 +258,7 @@
             // EditBtn
             // 
             this.EditBtn.Location = new System.Drawing.Point(47, 160);
-            this.EditBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.EditBtn.Margin = new System.Windows.Forms.Padding(4);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(223, 33);
             this.EditBtn.TabIndex = 15;
@@ -265,7 +269,7 @@
             // Btn_Order_Cancel
             // 
             this.Btn_Order_Cancel.Location = new System.Drawing.Point(47, 201);
-            this.Btn_Order_Cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Order_Cancel.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Order_Cancel.Name = "Btn_Order_Cancel";
             this.Btn_Order_Cancel.Size = new System.Drawing.Size(223, 32);
             this.Btn_Order_Cancel.TabIndex = 16;
@@ -299,11 +303,43 @@
             this.modemSettingsToolStripMenuItem.Text = "Modem Settings";
             this.modemSettingsToolStripMenuItem.Click += new System.EventHandler(this.modemSettingsToolStripMenuItem_Click);
             // 
+            // ModemLabel
+            // 
+            this.ModemLabel.AutoSize = true;
+            this.ModemLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModemLabel.Location = new System.Drawing.Point(819, 53);
+            this.ModemLabel.Name = "ModemLabel";
+            this.ModemLabel.Size = new System.Drawing.Size(64, 18);
+            this.ModemLabel.TabIndex = 18;
+            this.ModemLabel.Text = "Modem";
+            // 
+            // LEDBox
+            // 
+            this.LEDBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("LEDBox.InitialImage")));
+            this.LEDBox.Location = new System.Drawing.Point(830, 80);
+            this.LEDBox.Name = "LEDBox";
+            this.LEDBox.Size = new System.Drawing.Size(31, 21);
+            this.LEDBox.TabIndex = 19;
+            this.LEDBox.TabStop = false;
+            // 
+            // TestModemBtn
+            // 
+            this.TestModemBtn.Location = new System.Drawing.Point(677, 77);
+            this.TestModemBtn.Name = "TestModemBtn";
+            this.TestModemBtn.Size = new System.Drawing.Size(106, 24);
+            this.TestModemBtn.TabIndex = 20;
+            this.TestModemBtn.Text = "Test Modem";
+            this.TestModemBtn.UseVisualStyleBackColor = true;
+            this.TestModemBtn.Click += new System.EventHandler(this.TestModemBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(961, 708);
+            this.Controls.Add(this.TestModemBtn);
+            this.Controls.Add(this.LEDBox);
+            this.Controls.Add(this.ModemLabel);
             this.Controls.Add(this.Btn_Order_Cancel);
             this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.Server_Name);
@@ -320,7 +356,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -330,6 +366,7 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LEDBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,6 +396,9 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modemSettingsToolStripMenuItem;
+        private System.Windows.Forms.Label ModemLabel;
+        protected System.Windows.Forms.PictureBox LEDBox;
+        private System.Windows.Forms.Button TestModemBtn;
     }
 }
 
