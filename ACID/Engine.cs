@@ -513,6 +513,7 @@ namespace ACID
             DataSet CustomerDataSet;
             String CmdTxt;
             MySqlCommand cmd = new MySqlCommand();
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 this.conn.Open();
@@ -524,12 +525,22 @@ namespace ACID
                 MessageBox.Show(exep.Message);
                 MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 this.conn.Close();
+                Cursor.Current = Cursors.Default;
                 return;
             }
 
             CustomerDataSet = new DataSet();
 
-            Adapter.Fill(CustomerDataSet);
+            try
+            {
+                Adapter.Fill(CustomerDataSet);
+            } 
+            catch(Exception e2)
+            {
+                MessageBox.Show(e2.Message);
+                Cursor.Current = Cursors.Default;
+                return;
+            }
 
             if(this.PhoneNum.Text.Trim().Length > 0)
             {
@@ -564,6 +575,7 @@ namespace ACID
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                     this.conn.Close();
+                    Cursor.Current = Cursors.Default;
                 }
 
                 // Clear Fields (To Reload Delivery charge if changed in the contents of the Customer to be sent to MenuForm)
@@ -579,6 +591,7 @@ namespace ACID
             {
                 /*Do Nothing*/
             }
+            Cursor.Current = Cursors.Default;
         }
         protected override void Btn_Order_Cancel_Click(object sender, EventArgs e)
         {
@@ -656,14 +669,15 @@ namespace ACID
         }
         public void DataRecievedOnPort(Object sender, SerialDataReceivedEventArgs e)
         {
-            SetText(MySerialComm.ReadExisting().ToString());
+            SetText(MySerialComm.ReadLine().ToString());
         }
         private void SetText(string text)
         {
+            string mtch;
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
-            if (this.textBox1.InvokeRequired)
+            if (this.CustNum.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(SetText);
                 this.Invoke(d, new object[] { text });
@@ -674,9 +688,10 @@ namespace ACID
                 object sender = new object();
                 EventArgs e = new EventArgs();
                 mymatch = Regex.Match(text, @"NMBR\s*\=\s*([0-9\.]+)");
-                if (mymatch.Groups.Count > 0)
+                if (mymatch.Groups.Count >= 2)
                 {
-                    this.textBox1.Text = text.Substring(5);
+                    mtch = mymatch.ToString();
+                    this.CustNum.Text = mtch.Substring(7);
                     Search_Click(sender, (EventArgs)e);
                 }
             }
