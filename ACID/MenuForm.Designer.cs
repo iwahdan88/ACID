@@ -58,10 +58,9 @@ namespace ACID
             // 
             // Add_Item
             // 
-            this.Add_Item.Location = new System.Drawing.Point(205, 502);
-            this.Add_Item.Margin = new System.Windows.Forms.Padding(4);
+            this.Add_Item.Location = new System.Drawing.Point(154, 478);
             this.Add_Item.Name = "Add_Item";
-            this.Add_Item.Size = new System.Drawing.Size(161, 39);
+            this.Add_Item.Size = new System.Drawing.Size(121, 32);
             this.Add_Item.TabIndex = 2;
             this.Add_Item.Text = "اضف طلب";
             this.Add_Item.UseVisualStyleBackColor = true;
@@ -69,10 +68,9 @@ namespace ACID
             // 
             // Delete_Item
             // 
-            this.Delete_Item.Location = new System.Drawing.Point(782, 502);
-            this.Delete_Item.Margin = new System.Windows.Forms.Padding(4);
+            this.Delete_Item.Location = new System.Drawing.Point(586, 478);
             this.Delete_Item.Name = "Delete_Item";
-            this.Delete_Item.Size = new System.Drawing.Size(161, 39);
+            this.Delete_Item.Size = new System.Drawing.Size(121, 32);
             this.Delete_Item.TabIndex = 4;
             this.Delete_Item.Text = "امسح";
             this.Delete_Item.UseVisualStyleBackColor = true;
@@ -80,10 +78,9 @@ namespace ACID
             // 
             // Finish_Order
             // 
-            this.Finish_Order.Location = new System.Drawing.Point(376, 793);
-            this.Finish_Order.Margin = new System.Windows.Forms.Padding(4);
+            this.Finish_Order.Location = new System.Drawing.Point(282, 714);
             this.Finish_Order.Name = "Finish_Order";
-            this.Finish_Order.Size = new System.Drawing.Size(348, 38);
+            this.Finish_Order.Size = new System.Drawing.Size(261, 31);
             this.Finish_Order.TabIndex = 5;
             this.Finish_Order.Text = "تسجيل وطباعة الطلب";
             this.Finish_Order.UseVisualStyleBackColor = true;
@@ -105,13 +102,12 @@ namespace ACID
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.OrderedList.DefaultCellStyle = dataGridViewCellStyle1;
-            this.OrderedList.Location = new System.Drawing.Point(34, 568);
-            this.OrderedList.Margin = new System.Windows.Forms.Padding(4);
+            this.OrderedList.Location = new System.Drawing.Point(26, 532);
             this.OrderedList.Name = "OrderedList";
             this.OrderedList.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.OrderedList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.OrderedList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OrderedList.Size = new System.Drawing.Size(1078, 203);
+            this.OrderedList.Size = new System.Drawing.Size(808, 165);
             this.OrderedList.TabIndex = 8;
             this.OrderedList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrderedList_RowHeaderMouseDoubleClick);
             // 
@@ -131,14 +127,13 @@ namespace ACID
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 186);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Location = new System.Drawing.Point(26, 221);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1078, 284);
+            this.dataGridView1.Size = new System.Drawing.Size(808, 231);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseDoubleClick);
             // 
@@ -146,28 +141,26 @@ namespace ACID
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(477, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(358, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 40);
+            this.label1.Size = new System.Drawing.Size(129, 32);
             this.label1.TabIndex = 9;
             this.label1.Text = "قائمة الطلبات";
             // 
             // Cat_Panel
             // 
-            this.Cat_Panel.Location = new System.Drawing.Point(34, 61);
-            this.Cat_Panel.Margin = new System.Windows.Forms.Padding(4);
+            this.Cat_Panel.Location = new System.Drawing.Point(26, 50);
             this.Cat_Panel.Name = "Cat_Panel";
             this.Cat_Panel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Cat_Panel.Size = new System.Drawing.Size(1078, 106);
+            this.Cat_Panel.Size = new System.Drawing.Size(808, 149);
             this.Cat_Panel.TabIndex = 14;
             // 
             // MenuForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1144, 870);
+            this.ClientSize = new System.Drawing.Size(858, 763);
             this.Controls.Add(this.Cat_Panel);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
@@ -177,7 +170,6 @@ namespace ACID
             this.Controls.Add(this.Add_Item);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuForm";
@@ -208,5 +200,8 @@ namespace ACID
         private string Server_Name;
         public int CurrentTblindex;
         private TotalSumForm TotalSumWindow;
+        private string CurrPrintDept;
+        private string CurrPrintItems;
+        private bool PrintSchedule;
     }
 }

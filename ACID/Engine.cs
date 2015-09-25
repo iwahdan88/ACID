@@ -99,6 +99,7 @@ namespace ACID
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                PBar.Auth.Invoke(PBar.myDelegate);
                 ProgressTherad.Abort();
                 System.Environment.Exit(0);
             }
@@ -107,10 +108,9 @@ namespace ACID
             /*Get Menu Data*/
             try
             {
-               // xmlFile.Load(@"C:\Users\islam\Documents\Visual Studio 2013\Projects\ACID\MenuItems.xml");
-                xmlFile.Load(@"https://storage-download.googleapis.com/menudata/MenuItems.xml");
+                xmlFile.Load(@"https://storage-download.googleapis.com/menudata/MenuItems_Final.xml");
                 xmlFile.Save(@"./Backup/MenuItems.xml");
-                //File.WriteAllText(@"./Backup/MenuItems.xml", XmlDoc);
+                PBar.Auth.Invoke(PBar.myDelegate);
                 ProgressTherad.Abort();
 
             }
@@ -120,11 +120,13 @@ namespace ACID
                 try
                 {
                     xmlFile.Load(@"./Backup/MenuItems.xml");
+                    PBar.Auth.Invoke(PBar.myDelegate);
                     ProgressTherad.Abort();
                 }
                 catch (Exception ee)
                 {
                     MessageBox.Show(ee.Message);
+                    PBar.Auth.Invoke(PBar.myDelegate);
                     ProgressTherad.Abort();
                     System.Environment.Exit(0);
                 }
@@ -170,6 +172,14 @@ namespace ACID
             {
                 initString = "AT";
             }
+            try
+            {
+                MySerialComm.WriteLine(initString + Environment.NewLine);
+            }
+            catch (Exception Commex)
+            {
+                MessageBox.Show(Commex.Message);
+            }
         }
 
 
@@ -182,7 +192,7 @@ namespace ACID
         {
             Customer CustTobeAdded = new Customer("","","",0,0);
             bool IsAddSuccess = false;
-            AddCustForm = new AddCust();
+            AddCustForm = new AddCust(this.CustNum.Text);
             AddCustForm.ShowDialog();
             if (AddCustForm.IsDataEntered == true)
             {
@@ -262,6 +272,7 @@ namespace ACID
                     if (CustTobeSearched.GetPhoneNum() == "")
                     {
                         MessageBox.Show("هذا الرقم غير مسجل");
+                        this.Order.Enabled = false;
                     }
                 }
                 catch (MySqlException ex)
@@ -296,8 +307,7 @@ namespace ACID
             }
             catch(MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+                MessageBox.Show(ex.Message + "\n" + "هذه العملية لم تتم لعدم وجود اتصال بالسيرفر أو هذا الرقم مسجل بالفعل ....\n ملحوظة: لا يمكن تسجيل أكثر من عميل برقم تليفون واحد");
                 IsOk = false;
             }
 
@@ -448,12 +458,14 @@ namespace ACID
                 Menu.dataSet1.Tables[tbls].Columns.Add("السعر", typeof(String));
                 Menu.dataSet1.Tables[tbls].Columns.Add("الصنف", typeof(String));
                 Menu.dataSet1.Tables[tbls].Columns.Add("كود", typeof(String));
+                Menu.dataSet1.Tables[tbls].Columns.Add("القسم", typeof(String));
             }
             String ItemName = "";
             double ItemPrice = 0;
             String ItemSize = "";
             String CatName = "";
             String ItemCode = "";
+            String Department = "";
             int CatIndex = 0;
 
             for(int items = 0; items < TotalMenuItems; items++)
@@ -464,8 +476,9 @@ namespace ACID
                 ItemCode = elemList.Item(items).ChildNodes.Item(4).InnerText;
                 CatName = elemList.Item(items).ChildNodes.Item(1).InnerText;
                 CatIndex = Menu.dataSet1.Tables.IndexOf(CatName);
+                Department = elemList.Item(items).ChildNodes.Item(5).InnerText;
                 // add row to corresponding table
-                Menu.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString(),CatName, ItemCode });
+                Menu.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString(), CatName, ItemCode, Department });
             }
 
             Menu.dataGridView1.DataSource = Menu.dataSet1.Tables[0];
@@ -485,6 +498,7 @@ namespace ACID
 
             Menu.dataSet2.Tables[1].Columns.Add("Code", typeof(String));
             Menu.dataSet2.Tables[1].Columns.Add("Category", typeof(String));
+            Menu.dataSet2.Tables[1].Columns.Add("القسم", typeof(String));
 
             Menu.OrderedList.DataSource = Menu.dataSet2.Tables[0];
 
@@ -498,6 +512,12 @@ namespace ACID
             Menu.OrderedList.Columns[2].Width = 230;
 
             Menu.ShowDialog();
+
+            /* Revert Back to Customer Schemas*/
+
+            myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
+            "pwd=" + Password + ";" + "database=customers;";
+            conn.ConnectionString = myConnectionString;
         }
         protected override void CustNum_KeyDown(object sender, KeyEventArgs e)
         {
@@ -639,6 +659,12 @@ namespace ACID
                     MessageBox.Show(exp2.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                     this.conn.Close();
+
+                    /* Revert Back to Customer Schemas*/
+
+                    myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
+                    "pwd=" + Password + ";" + "database=customers;";
+                    conn.ConnectionString = myConnectionString;
                     return;
                 }
 
@@ -651,6 +677,15 @@ namespace ACID
                     this.conn.Open();
                     cmd.ExecuteNonQuery();
                     this.conn.Close();
+
+                    CmdTxt = @"DELETE FROM ordered_items WHERE OrderID =" + OrderID + ";";
+
+                    cmd.CommandText = CmdTxt;
+
+                    this.conn.Open();
+                    cmd.ExecuteNonQuery();
+                    this.conn.Close();
+
                     if (IsOrderExist == true)
                     {
                         MessageBox.Show("تم الغاء الطلب رقم : " + "  " + OrderID + "  " + "بنجاح");
@@ -664,8 +699,20 @@ namespace ACID
                 {
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
+
                     this.conn.Close();
+
+                    /* Revert Back to Customer Schemas*/
+                    myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
+                    "pwd=" + Password + ";" + "database=customers;";
+                    conn.ConnectionString = myConnectionString;
                 }
+
+                /* Revert Back to Customer Schemas*/
+
+                myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
+                "pwd=" + Password + ";" + "database=customers;";
+                conn.ConnectionString = myConnectionString;
 
             }
         }
@@ -723,11 +770,20 @@ namespace ACID
         {
             try
             {
-                MySerialComm.WriteLine(initString + Environment.NewLine);
+                if(!MySerialComm.IsOpen)
+                {
+                    MySerialComm.Open();
+                    MySerialComm.WriteLine(initString + Environment.NewLine);
+                }
+                else
+                {
+                    MySerialComm.WriteLine(initString + Environment.NewLine);
+                }
             }
             catch (Exception Commex)
             {
                 MessageBox.Show(Commex.Message);
+                this.LEDBox.Hide();
             }
         }
     }

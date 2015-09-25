@@ -36,7 +36,13 @@ namespace ACID
             this.PhoneNum.Text = Phone;
             this.textBox1.Text = DeliveryCharge.ToString();
         }
+        public AddCust(String PhoneNum)
+        {
+            InitializeComponent();
+            this.Phone = PhoneNum;
 
+            this.PhoneNum.Text = PhoneNum;
+        }
         private void Cust_Name_TextChanged(object sender, EventArgs e)
         {
             if ((this.Cust_Name.Text.Trim().Length > 0) && (this.Adresse.Text.Trim().Length > 0) && (this.PhoneNum.Text.Trim().Length > 0))

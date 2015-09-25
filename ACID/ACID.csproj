@@ -210,6 +210,12 @@
     <Content Include="MenuItems.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\Led3.jpg" />
+    <None Include="Resources\Led2.jpg" />
+    <None Include="Resources\Led1.jpg" />
+    <None Include="Resources\Led.jpg" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\LedGreen.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

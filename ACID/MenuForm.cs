@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace ACID
 {
@@ -65,6 +66,7 @@ namespace ACID
             DateTime LastOrderDate = new DateTime();
             String Date;
             bool bIsOneOrder = false;
+            List<String>[] InternalReciptDataElm = new List<string>[2];
 
             NewOrder = new Order(OrderTypes.Delivery);
             /* Compute Order Total */
@@ -182,7 +184,7 @@ namespace ACID
                 NewOrder.Order_SetTimestmp(NewDate.ToString());
                 NewOrder.Order_SetCustAddr(this.MyCustomer.GetAddr());
                 NewOrder.Order_SetCustTel(this.MyCustomer.GetPhoneNum());
-                if (this.MyCustomer.GetDeliveryCharge() == null)
+                if (this.MyCustomer.GetDeliveryCharge() == 0)
                 {
                     NewOrder.Order_SetDeliveryCharge(0);
                 }
@@ -199,27 +201,13 @@ namespace ACID
                 }
                 /*Update Daily Order Count*/
 
-                if (this.Server_Name == "Remote")
+                if (bIsOneOrder == true)
                 {
-                    if (bIsOneOrder == true)
-                    {
-                        CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "', DateTime= '" + NewDate+"'" + " WHERE Row =0" + ";";
-                    }
-                    else
-                    {
-                        CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
-                    }
+                    CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + ", ProtectMode=b'1' WHERE Row =0" + ";";
                 }
                 else
                 {
-                    if (bIsOneOrder == true)
-                    {
-                        CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "', DateTime= '" + NewDate +"'" + " WHERE Row =0" + ";";
-                    }
-                    else
-                    {
-                        CmdTxt = "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + " WHERE Row =0" + ";";
-                    }
+                    CmdTxt = ChangeTimeZone + "\n" + "UPDATE order_count SET OrderCount =" + "'" + SubOrderNo + "'" + ", ProtectMode=b'0' WHERE Row =0" + ";";
                 }
 
                 cmd.CommandText = CmdTxt;
@@ -302,13 +290,81 @@ namespace ACID
 
                 PrintDocument Reciept = new PrintDocument();
                 Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
-                Reciept.Print();
+                try
+                {
+                    Reciept.Print();
+                }
+                catch(Exception prntex)
+                {
+                    MessageBox.Show(prntex.Message + "\n لايمكن طباعة هذا الطلب ... رقم الطلب: " + NewOrder.Order_GetOrderID().ToString());
+                }
 
-                /* Reset Orders*/
-                this.dataSet2.Tables[0].Clear();
+                PrintDocument RecieptInternal = new PrintDocument();
+                RecieptInternal.PrintPage += new PrintPageEventHandler(PrintRecieptInternal);
+
+                InternalReciptDataElm = GetInternalRecieptData();
+
+                for (int printloops = 0; printloops < InternalReciptDataElm[0].Count; printloops++)
+                {
+                    this.CurrPrintDept = (InternalReciptDataElm[0])[printloops];
+                    this.CurrPrintItems = (InternalReciptDataElm[1])[printloops];
+                    this.PrintSchedule = false;
+                    try
+                    {
+                      RecieptInternal.Print();
+                    }
+                    catch(Exception exptiopn)
+                    {
+                        MessageBox.Show(exptiopn.Message);
+                        this.PrintSchedule = true;
+                    }
+                    while(!this.PrintSchedule)
+                    {
+                        /* Wait */
+                    }
+                }
+
+                    /* Reset Orders*/
+                    this.dataSet2.Tables[0].Clear();
+                this.dataSet2.Tables[1].Clear();
 
                 this.Dispose();
             }
+        }
+        private List<String>[] GetInternalRecieptData()
+        {
+            List<String>[] DataArray = new List<String>[2];
+
+            List<String>DeptList = new List<string>{this.dataSet2.Tables[1].Rows[0].ItemArray[2].ToString()};
+
+            List<String>ItemsList = new List<string> {"\n" + dataSet2.Tables[0].Rows[0].ItemArray[0].ToString() + "   "
+                                            + dataSet2.Tables[0].Rows[0].ItemArray[1].ToString() + "  "
+                                            + dataSet2.Tables[0].Rows[0].ItemArray[2].ToString()};
+
+            int Index = 0;
+
+            for(int i = 1; i < this.dataSet2.Tables[1].Rows.Count; i++)
+            {
+                if (!(DeptList.Contains(this.dataSet2.Tables[1].Rows[i].ItemArray[2].ToString())))
+                {
+                    DeptList.Add(this.dataSet2.Tables[1].Rows[i].ItemArray[2].ToString());
+                    ItemsList.Add ("\n" + dataSet2.Tables[0].Rows[i].ItemArray[0].ToString() + "   "
+                                        + dataSet2.Tables[0].Rows[i].ItemArray[1].ToString() + "  "
+                                        + dataSet2.Tables[0].Rows[i].ItemArray[2].ToString());
+                }
+                else
+                {
+                   Index = DeptList.IndexOf(this.dataSet2.Tables[1].Rows[i].ItemArray[2].ToString());
+                   ItemsList[Index] += "\n" + dataSet2.Tables[0].Rows[i].ItemArray[0].ToString() + "   " 
+                                            + dataSet2.Tables[0].Rows[i].ItemArray[1].ToString() + "  " 
+                                            + dataSet2.Tables[0].Rows[i].ItemArray[2].ToString();
+                }
+            }
+
+            DataArray[0] = DeptList;
+            DataArray[1] = ItemsList;
+
+            return DataArray;
         }
         private void PrintReciept(Object sender, PrintPageEventArgs e)
         {
@@ -320,6 +376,7 @@ namespace ACID
             int startX = 250;
             int startY = 0;
             int Offset = 20;
+            int fontwidth = 10;
             String ItemName = "";
             String ItemSize = "";
             String ItemPrice = "";
@@ -337,26 +394,32 @@ namespace ACID
 
             graphics.DrawString("مرحبا بكم في مطعم" + "\n" + "    شيخ البلد", new Font("Courier New", 14,FontStyle.Bold),
                                 new SolidBrush(Color.Black), startX - 10, startY + Offset, Rformat);
+
+            Offset = Offset + 50;
+
+            graphics.DrawString("أبو مهند", new Font("Courier New", 10, FontStyle.Bold),
+                    new SolidBrush(Color.Black), startX -75, startY + Offset, Rformat);
+
             Offset = Offset + 90;
 
             graphics.DrawString("Order #:" + NewOrder.Order_GetOrderSubID(),
-                     new Font("Courier New", 8),
+                     new Font("Courier New", fontwidth),
                      new SolidBrush(Color.Black), startX-240, startY + Offset);
             Offset = Offset + 20;
 #if DELIVERY
             graphics.DrawString("Tel: " + NewOrder.Order_GetCustTel(),
-                     new Font("Courier New", 8),
+                     new Font("Courier New", fontwidth),
                      new SolidBrush(Color.Black), startX-240, startY + Offset);
             Offset = Offset + 20;
 
 
             graphics.DrawString("خدمة توصيل",
-                     new Font("Courier New", 8),
+                     new Font("Courier New", fontwidth),
                      new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
             Offset = Offset + 20;
 
             graphics.DrawString("اسم العميل : " + MyCustomer.GetName(),
-                     new Font("Courier New", 8),
+                     new Font("Courier New", fontwidth),
                      new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
 
             Offset = Offset + 20;
@@ -365,21 +428,21 @@ namespace ACID
             {
                 Split = SplitString(MyCustomer.GetAddr());
                 graphics.DrawString("العنوان : " + Split[0] + "\n" + Split[1],
-                    new Font("Courier New", 6),
+                    new Font("Courier New", fontwidth-1),
                     new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
             }
             else
             {
                 graphics.DrawString("العنوان : " +MyCustomer.GetAddr(),
-                    new Font("Courier New", 6),
+                    new Font("Courier New", fontwidth-1),
                     new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
             }
 
-            Offset = Offset + 25;
+            Offset = Offset + 50;
 #endif
 
             graphics.DrawString("Date/Time  " + NewOrder.Order_GetTimeStmp(),
-                     new Font("Courier New", 8),
+                     new Font("Courier New", fontwidth),
                      new SolidBrush(Color.Black), startX-240, startY + Offset);
 
             Offset = Offset + 40;
@@ -393,6 +456,9 @@ namespace ACID
             graphics.DrawString("-------------------------------", new Font("Courier New", 8),
                      new SolidBrush(Color.Black), startX-5, startY + Offset, Rformat);
             Offset = Offset + 10;
+
+            string SpaceMargin = "   ";
+
             for(int i = 0; i < this.dataSet2.Tables[0].Rows.Count; i++)
             {
                 ItemName = this.dataSet2.Tables[0].Rows[i].ItemArray[1].ToString();
@@ -404,13 +470,25 @@ namespace ACID
 
                 stringCollLenth = Concat.Length;
 
+                if (Convert.ToInt16(ItemPrice) >= 10)
+                {
+                    SpaceMargin = "  ";
+                }
+                else if (Convert.ToInt16(ItemPrice) >= 100)
+                {
+                    SpaceMargin = " ";
+                }
+                else
+                {
+                    SpaceMargin = "   ";
+                }
                 if (stringCollLenth > 14)
                 {
                     Split = SplitString(Concat);
                     graphics.DrawString(Split[0], new Font("Courier New", 8),
                      new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
 
-                    graphics.DrawString(ItemPrice + "   |   " + ItemQuantity, new Font("Courier New", 8),
+                    graphics.DrawString(ItemPrice + SpaceMargin + "|" + SpaceMargin + ItemQuantity, new Font("Courier New", 8),
                      new SolidBrush(Color.Black), startX -220, startY + Offset);
 
                     Offset = Offset + 10;
@@ -424,7 +502,7 @@ namespace ACID
                     graphics.DrawString(Concat, new Font("Courier New", 8),
                     new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
 
-                    graphics.DrawString(ItemPrice + "    |    " + ItemQuantity, new Font("Courier New", 8),
+                    graphics.DrawString(ItemPrice + SpaceMargin + "|" + SpaceMargin + ItemQuantity, new Font("Courier New", 8),
                      new SolidBrush(Color.Black), startX -220, startY + Offset);
 
                     Offset = Offset + 15;
@@ -436,10 +514,10 @@ namespace ACID
 
             Offset = Offset + 15;
 #if DELIVERY
-            graphics.DrawString("خدمة التوصيل", new Font("Courier New", 8),
+            graphics.DrawString("خدمة التوصيل", new Font("Courier New", fontwidth),
                     new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
 
-            graphics.DrawString(NewOrder.Order_GetDeliveryCharge().ToString(), new Font("Courier New", 8),
+            graphics.DrawString(NewOrder.Order_GetDeliveryCharge().ToString(), new Font("Courier New", fontwidth),
                     new SolidBrush(Color.Black), startX - 220, startY + Offset);
 
             Offset = Offset + 15;
@@ -450,10 +528,10 @@ namespace ACID
 
             Offset = Offset + 15;
 
-            graphics.DrawString("الإجمالي", new Font("Courier New", 8, FontStyle.Bold),
+            graphics.DrawString("الإجمالي", new Font("Courier New", fontwidth, FontStyle.Bold),
                     new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
 
-            graphics.DrawString(NewOrder.Order_GetOrderTotal().ToString(), new Font("Courier New", 8, FontStyle.Bold),
+            graphics.DrawString(NewOrder.Order_GetOrderTotal().ToString(), new Font("Courier New", fontwidth, FontStyle.Bold),
                     new SolidBrush(Color.Black), startX - 220, startY + Offset);
 
             Offset = Offset + 40;
@@ -470,6 +548,38 @@ namespace ACID
 
             graphics.DrawString("16748", new Font("Courier New", 20, FontStyle.Bold),
                     new SolidBrush(Color.Black), startX - 155, startY + Offset);
+
+        }
+
+        private void PrintRecieptInternal(Object sender, PrintPageEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            Font font = new Font("Courier New", 10);
+
+            float fontHeight = font.GetHeight();
+
+            int fontwidth = 10;
+
+            int startX = 250;
+            int startY = 0;
+            int Offset = 20;
+
+            StringFormat Rformat = new StringFormat(StringFormatFlags.DirectionRightToLeft);
+
+            graphics.DrawString("Serial: " + NewOrder.Order_GetOrderID(), new Font("Courier New", fontwidth),
+                    new SolidBrush(Color.Black), startX - 160, startY + Offset);
+
+            Offset = Offset + 20;
+
+            graphics.DrawString("قسم :" + this.CurrPrintDept, new Font("Courier New", 12, FontStyle.Bold),
+                                new SolidBrush(Color.Black), startX - 10, startY + Offset, Rformat);
+            Offset = Offset + 20;
+
+            graphics.DrawString(this.CurrPrintItems,
+                     new Font("Courier New", fontwidth),
+                     new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
+
+            this.PrintSchedule = true;
 
         }
 
@@ -525,12 +635,13 @@ namespace ACID
             String ItemSize;
             String count;
             String ItemCode;
+            String ItemDepartment;
             int ItemCount = 1;
 
             ItemName = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
             ItemPrice = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[2].Value.ToString();
             ItemSize = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[1].Value.ToString();
-
+            ItemDepartment = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[5].Value.ToString();
             ItemCode = this.dataSet1.Tables[CurrentTblindex].Rows[dataGridView1.SelectedRows[0].Index].ItemArray[4].ToString();
 
             DataRow[] Names = this.dataSet2.Tables[0].Select("الاسم= '" + ItemName + "' and " + "الحجم= '" + ItemSize + "'");
@@ -545,20 +656,21 @@ namespace ACID
             else
            {
                 this.dataSet2.Tables[0].Rows.Add(ItemCount.ToString(), ItemName, ItemSize, ItemPrice);
+                dataSet2.Tables[1].Rows.Add(ItemCode, this.dataSet1.Tables[CurrentTblindex].TableName, ItemDepartment);
            }
-
-            dataSet2.Tables[1].Rows.Add(ItemCode, this.dataSet1.Tables[CurrentTblindex].TableName);
             
         }
         private void DeleteItem()
         {
             try
             {
+                int delIndex = this.OrderedList.SelectedRows[0].Index;
                 this.OrderedList.Rows.Remove(this.OrderedList.SelectedRows[0]);
+                this.dataSet2.Tables[1].Rows.Remove(this.dataSet2.Tables[1].Rows[delIndex]);
             }
             catch (Exception exp)
             {
-                /*Do Nothing*/
+                MessageBox.Show(exp.Message);
             }
         }
 

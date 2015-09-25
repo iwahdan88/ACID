@@ -7,18 +7,21 @@ namespace ACID
 {
     class ProgressBar
     {
-        Authentication Auth;
+        public Authentication Auth;
+        public delegate void ClosePBar();
+        public ClosePBar myDelegate;
         public ProgressBar()
         {
             Auth = new Authentication();
+            myDelegate = new ClosePBar(kill);
         }
         public void Start()
         {
-            Auth.ShowDialog();
+           Auth.ShowDialog();
         }
-        public void Stop()
+        private void kill ()
         {
-            Auth.Close();
+            Auth.Dispose();
         }
     }
 }
