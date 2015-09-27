@@ -69,6 +69,16 @@ namespace ACID
             List<String>[] InternalReciptDataElm = new List<string>[2];
 
             NewOrder = new Order(OrderTypes.Delivery);
+            /* Get Delivery Charge */
+            if (this.MyCustomer.GetDeliveryCharge() == 0)
+            {
+                NewOrder.Order_SetDeliveryCharge(0);
+            }
+            else
+            {
+                NewOrder.Order_SetDeliveryCharge(this.MyCustomer.GetDeliveryCharge());
+            }
+
             /* Compute Order Total */
             NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
 
@@ -184,14 +194,7 @@ namespace ACID
                 NewOrder.Order_SetTimestmp(NewDate.ToString());
                 NewOrder.Order_SetCustAddr(this.MyCustomer.GetAddr());
                 NewOrder.Order_SetCustTel(this.MyCustomer.GetPhoneNum());
-                if (this.MyCustomer.GetDeliveryCharge() == 0)
-                {
-                    NewOrder.Order_SetDeliveryCharge(0);
-                }
-                else
-                {
-                    NewOrder.Order_SetDeliveryCharge(this.MyCustomer.GetDeliveryCharge());
-                }
+
                 /*NewOrder.Order_SetOrderTotal(GetTotalOrderValue());*/
 
                 if (System.DateTime.Now.CompareTo(LastOrderDate) < 0)
@@ -292,6 +295,7 @@ namespace ACID
                 Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
                 try
                 {
+                    Reciept.Print();
                     Reciept.Print();
                 }
                 catch(Exception prntex)
@@ -756,7 +760,7 @@ namespace ACID
                 Sum = Sum + ((Convert.ToInt32(this.dataSet2.Tables[0].Rows[i].ItemArray[0])) * (Convert.ToDouble(this.dataSet2.Tables[0].Rows[i].ItemArray[3])));
             }
 
-            Sum += +NewOrder.Order_GetDeliveryCharge();
+            Sum += NewOrder.Order_GetDeliveryCharge();
 
             return Sum;
         }
