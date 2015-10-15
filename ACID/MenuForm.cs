@@ -293,18 +293,28 @@ namespace ACID
 
                 PrintDocument Reciept = new PrintDocument();
                 Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
+                Reciept.EndPrint += new PrintEventHandler(EndReciptPrint);
                 try
                 {
-                    Reciept.Print();
-                    Reciept.Print();
+                    for (int PrintCount = 0; PrintCount < 2; PrintCount++ )
+                    {
+                        this.PrintScheduleMain = false;
+                        Reciept.Print();
+                        while(!this.PrintScheduleMain)
+                        {
+                            /* Wait */
+                        }
+                    }
                 }
                 catch(Exception prntex)
                 {
                     MessageBox.Show(prntex.Message + "\n لايمكن طباعة هذا الطلب ... رقم الطلب: " + NewOrder.Order_GetOrderID().ToString());
+                    this.PrintScheduleMain = true;
                 }
 
                 PrintDocument RecieptInternal = new PrintDocument();
                 RecieptInternal.PrintPage += new PrintPageEventHandler(PrintRecieptInternal);
+                RecieptInternal.EndPrint += new PrintEventHandler(EndInternalReciptPrint);
 
                 InternalReciptDataElm = GetInternalRecieptData();
 
@@ -388,6 +398,9 @@ namespace ACID
             int stringCollLenth = 0;
             String Concat = "";
             String[] Split = { "", "" };
+            List<String[]> SplitAddr = new List<string[]>();
+
+            PrintDocument Reciept = new PrintDocument();
 
             StringFormat Rformat = new StringFormat(StringFormatFlags.DirectionRightToLeft);
 
@@ -404,7 +417,7 @@ namespace ACID
             graphics.DrawString("أبو مهند", new Font("Courier New", 10, FontStyle.Bold),
                     new SolidBrush(Color.Black), startX -75, startY + Offset, Rformat);
 
-            Offset = Offset + 90;
+            Offset = Offset + 60;
 
             graphics.DrawString("Order #:" + NewOrder.Order_GetOrderSubID(),
                      new Font("Courier New", fontwidth),
@@ -419,34 +432,72 @@ namespace ACID
 
             graphics.DrawString("خدمة توصيل",
                      new Font("Courier New", fontwidth),
-                     new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
-            Offset = Offset + 20;
+                     new SolidBrush(Color.Black), startX+20, startY + Offset, Rformat);
+            Offset = Offset + 30;
 
             graphics.DrawString("اسم العميل : " + MyCustomer.GetName(),
                      new Font("Courier New", fontwidth),
-                     new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
+                     new SolidBrush(Color.Black), startX+20, startY + Offset, Rformat);
 
-            Offset = Offset + 20;
+            Offset = Offset + 30;
 
+            int level = 0;
+            String WholeString = "";
+            int OffsetAfterAddr = 0;
             if (MyCustomer.GetAddr().Length > 40)
             {
-                Split = SplitString(MyCustomer.GetAddr());
-                graphics.DrawString("العنوان : " + Split[0] + "\n" + Split[1],
-                    new Font("Courier New", fontwidth-1),
-                    new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
+                SplitAddr.Add(SplitString(MyCustomer.GetAddr()));
+                while ((SplitAddr[SplitAddr.Count - 1])[0].Length > 40)
+                {
+                    level++;
+                    for(int lvlindex = 0; lvlindex < level; lvlindex++)
+                    {
+                        SplitAddr.Add(SplitString((SplitAddr[lvlindex])[0]));
+                        SplitAddr.Add(SplitString((SplitAddr[lvlindex])[1]));
+                    }
+                }
+                if(level == 0)
+                {
+                    WholeString += "\n" + (SplitAddr[0])[0] + "\n" + (SplitAddr[0])[1];
+
+                    OffsetAfterAddr += (2 * 10);
+                }
+                else
+                {
+                    for (int Strings = (level * 2); Strings > 0; Strings--)
+                    {
+                        if ((SplitAddr[Strings])[0].Length > 15)
+                        {
+                            WholeString += "\n" + (SplitAddr[SplitAddr.Count - Strings])[0] + "\n" + (SplitAddr[SplitAddr.Count - Strings])[1];
+
+                            OffsetAfterAddr += (2 * 10);
+                        }
+                        else
+                        {
+                            WholeString += "\n" + (SplitAddr[SplitAddr.Count - Strings])[0] + (SplitAddr[SplitAddr.Count - Strings])[1];
+
+                            OffsetAfterAddr += 10;
+                        }
+                    }
+                }
+                    graphics.DrawString("العنوان : " + WholeString,
+                        new Font("Courier New", 8),
+                        new SolidBrush(Color.Black), startX + 20, startY + Offset, Rformat);
+
+                    Offset += OffsetAfterAddr;
             }
             else
             {
                 graphics.DrawString("العنوان : " +MyCustomer.GetAddr(),
-                    new Font("Courier New", fontwidth-1),
-                    new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
+                    new Font("Courier New", 8),
+                    new SolidBrush(Color.Black), startX+20, startY + Offset, Rformat);
             }
 
             Offset = Offset + 50;
 #endif
 
             graphics.DrawString("Date/Time  " + NewOrder.Order_GetTimeStmp(),
-                     new Font("Courier New", fontwidth),
+                     new Font("Courier New", 8),
                      new SolidBrush(Color.Black), startX-240, startY + Offset);
 
             Offset = Offset + 40;
@@ -582,8 +633,6 @@ namespace ACID
             graphics.DrawString(this.CurrPrintItems,
                      new Font("Courier New", fontwidth),
                      new SolidBrush(Color.Black), startX, startY + Offset, Rformat);
-
-            this.PrintSchedule = true;
 
         }
 
@@ -779,6 +828,14 @@ namespace ACID
                 bIsAccepet = false;
             }
             return bIsAccepet;
+        }
+        private void EndReciptPrint(Object sender, PrintEventArgs e)
+        {
+            this.PrintScheduleMain = true;
+        }
+        private void EndInternalReciptPrint(Object sender, PrintEventArgs e)
+        {
+            this.PrintSchedule = true;
         }
     }
 }

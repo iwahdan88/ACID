@@ -203,5 +203,6 @@ namespace ACID
         private string CurrPrintDept;
         private string CurrPrintItems;
         private bool PrintSchedule;
+        private bool PrintScheduleMain;
     }
 }

@@ -309,6 +309,8 @@ namespace ACID
             {
                 MessageBox.Show(ex.Message + "\n" + "هذه العملية لم تتم لعدم وجود اتصال بالسيرفر أو هذا الرقم مسجل بالفعل ....\n ملحوظة: لا يمكن تسجيل أكثر من عميل برقم تليفون واحد");
                 IsOk = false;
+                /* Close Connection */
+                conn.Close();
             }
 
             return IsOk;
