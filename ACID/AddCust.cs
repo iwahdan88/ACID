@@ -12,7 +12,7 @@ namespace ACID
 {
     public partial class AddCust : Form
     {
-        public String Name;
+        public String CustomerName;
         public String Address;
         public String Phone;
         public double DeliverCharge;
@@ -20,13 +20,13 @@ namespace ACID
         public AddCust()
         {
             InitializeComponent();
-            Name = Address = Phone = "";
+            CustomerName = Address = Phone = "";
             DeliverCharge = 0;
         }
         public AddCust(String Name, String Addresse, String Phone, double DeliveryCharge)
         {
             InitializeComponent();
-            this.Name = Name;
+            this.CustomerName = Name;
             this.Address = Addresse;
             this.Phone = Phone;
             this.DeliverCharge = DeliveryCharge;
@@ -93,7 +93,7 @@ namespace ACID
 
         private void Add_Click(object sender, EventArgs e)
         {
-            Name = this.Cust_Name.Text;
+            CustomerName = this.Cust_Name.Text;
             Address = this.Adresse.Text;
             if (this.textBox1.Text.Trim().Length == 0)
             {

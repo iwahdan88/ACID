@@ -22,16 +22,16 @@ namespace ACID
     {
         private MySql.Data.MySqlClient.MySqlConnection conn;
         private String myConnectionString;
-
+        private MySql.Data.MySqlClient.MySqlConnection conn2;
         private Authentication AuthForm;
         private AddCust AddCustForm;
         public Button[] CatButtons;
-        private MenuForm Menu;
+        private MenuForm MenuWindow;
         private CustListForm CustomerForm;
         private Customer CustTobeSearched;
         private String CurrUserID;
         private String Password;
-        private String Server;
+        private String ServerName;
         private OrderCancelForm CancelForm;
         private SettingsForm SettingsForm;
         private string CommPort;
@@ -47,7 +47,7 @@ namespace ACID
         public Engine(String UserID, String Pass): base(UserID, Pass)
         {
             Match mymatch;
-            Server = "";
+            ServerName = "";
             xmlFile = new XmlDocument();
             Cursor.Current = Cursors.WaitCursor;
             CurrUserID = UserID;
@@ -65,24 +65,24 @@ namespace ACID
                 mymatch = Regex.Match(text, @"Server\s*\=\s*([0-9\.]+)");
                 if(mymatch.Groups.Count < 2)
                 {
-                    Server = "localhost";
-                    this.Server_Name.Text = Server;
+                    ServerName = "localhost";
+                    this.Server_Name.Text = ServerName;
                 }
                 else
                 {
-                    Server = mymatch.Groups[1].Value;
+                    ServerName = mymatch.Groups[1].Value;
                     this.Server_Name.Text = "Remote";
                 }
             }
             catch(Exception e)
             {
                 MessageBox.Show(e.Message + "  ....  using localhost instead");
-                Server = "localhost";
-                this.Server_Name.Text = Server;
+                ServerName = "localhost";
+                this.Server_Name.Text = ServerName;
             }
             /*Start Database Connection*/
 
-            myConnectionString = "server=" + Server + ";uid=" + UserID + ";" +
+            myConnectionString = "server=" + ServerName + ";uid=" + UserID + ";" +
             "pwd=" + Pass + ";" + "database=customers;";
 
 
@@ -91,13 +91,19 @@ namespace ACID
                 /*Load Log In Window*/
                 ProgressTherad.Start();
                 conn = new MySql.Data.MySqlClient.MySqlConnection();
+                conn2 = new MySql.Data.MySqlClient.MySqlConnection();
                 conn.ConnectionString = myConnectionString;
                 conn.Open();
+                myConnectionString = "server=" + ServerName + ";uid=" + CurrUserID + ";" +
+                "pwd=" + Password + ";" + "database=orders;";
+                conn2.ConnectionString = myConnectionString;
+                conn2.Open();
 
-                conn.Close();
             }
             catch (Exception ex)
             {
+                conn.Close();
+                conn2.Close();
                 MessageBox.Show(ex.Message);
                 PBar.Auth.Invoke(PBar.myDelegate);
                 ProgressTherad.Abort();
@@ -142,6 +148,7 @@ namespace ACID
             }
             catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 SettingsForm = new SettingsForm();
                 SettingsForm.ShowDialog();
                 CommPort = SettingsForm.PortName ;
@@ -152,6 +159,7 @@ namespace ACID
                 catch(Exception ee)
                 {
                     baudRate = "152200";
+                    MessageBox.Show(ee.Message);
                 }
                 initString = SettingsForm.InitString;
             }
@@ -225,17 +233,8 @@ namespace ACID
         protected override void Search_Click(object sender, EventArgs e)
         {
             MySqlCommand cmd = new MySqlCommand();
-            MySqlDataReader reader;
+            MySqlDataReader reader = null ;
             CustTobeSearched = new Customer("","","",0,0);
-
-            if(conn.State == ConnectionState.Open)
-            {
-                conn.Close();
-            }
-
-            myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-                                "pwd=" + Password + ";" + "database=customers;";
-            conn.ConnectionString = myConnectionString;
 
             if (!(System.Text.RegularExpressions.Regex.IsMatch(this.CustNum.Text, "^\\d+$")))
             {
@@ -251,7 +250,6 @@ namespace ACID
                 cmd.CommandText = CmdTxt;
                 try
                 {
-                    conn.Open();
                     reader = cmd.ExecuteReader();
                     Cursor.Current = Cursors.WaitCursor;
                     while (reader.Read())
@@ -267,16 +265,17 @@ namespace ACID
                     this.PhoneNum.Text = CustTobeSearched.GetPhoneNum();
                     Cursor.Current = Cursors.Default;
                     this.Order.Enabled = true;
-                    conn.Close();
 
                     if (CustTobeSearched.GetPhoneNum() == "")
                     {
                         MessageBox.Show("هذا الرقم غير مسجل");
                         this.Order.Enabled = false;
                     }
+                    reader.Close();
                 }
                 catch (MySqlException ex)
                 {
+                    //reader.Close();
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 }
@@ -298,19 +297,13 @@ namespace ACID
 
             try
             {
-                /* Open Command Connection */
-                conn.Open();
                 /* Execute Command */
                 cmd.ExecuteNonQuery();
-                /* Close Connection */
-                conn.Close();
             }
             catch(MySqlException ex)
             {
                 MessageBox.Show(ex.Message + "\n" + "هذه العملية لم تتم لعدم وجود اتصال بالسيرفر أو هذا الرقم مسجل بالفعل ....\n ملحوظة: لا يمكن تسجيل أكثر من عميل برقم تليفون واحد");
                 IsOk = false;
-                /* Close Connection */
-                conn.Close();
             }
 
             return IsOk;
@@ -321,6 +314,7 @@ namespace ACID
             {
                 /* Close Connection */
                 conn.Close();
+                conn2.Close();
             }
             catch (MySqlException ex)
             {
@@ -338,7 +332,7 @@ namespace ACID
         protected override void Order_Click(object sender, EventArgs e)
         {
             MySqlCommand cmd = new MySqlCommand();
-            MySqlDataReader reader;
+            MySqlDataReader reader = null;
             uint Orders = 0;
             String CmdTxt = @"SELECT No_of_Orders FROM cust_info WHERE Phone='" + this.CustNum.Text +"'" ;
             cmd.CommandText = CmdTxt;
@@ -349,19 +343,18 @@ namespace ACID
             XmlElement root;
             int TotalMenuItems;
 
-
             try
             {
-                conn.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     Orders = reader.GetUInt32("No_of_Orders");
                 }
-                conn.Close();
+                reader.Close();
             }
             catch(MySqlException ex)
             {
+               // reader.Close();
                 MessageBox.Show(ex.Message);
                 MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                 return;
@@ -371,9 +364,7 @@ namespace ACID
             cmd.CommandText = CmdTxt;
             try
             {
-                conn.Open();
                 cmd.ExecuteNonQuery();
-                conn.Close();
                 
             }
             catch (MySqlException ex)
@@ -426,15 +417,11 @@ namespace ACID
             }
             else
             {
-                MessageBox.Show("No Menu XML file to Import From!");
+                MessageBox.Show("No MenuWindow XML file to Import From!");
                 return;
             }
 
-            myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-                        "pwd=" + Password + ";" + "database=orders;";
-            conn.ConnectionString = myConnectionString;
-
-            Menu = new MenuForm(conn, CustTobeSearched, CurrUserID, this.Server_Name.Text);
+            MenuWindow = new MenuForm(conn2, CustTobeSearched, CurrUserID, this.Server_Name.Text);
             ListOfTables = new DataTable[DataTables.Count];
             CatButtons = new Button[DataTables.Count];
 
@@ -448,19 +435,19 @@ namespace ACID
                    CatButtons[Index].Click += new EventHandler(Cat_btn_Click);
                    CatButtons[Index].Width = 120;
                 }
-                Menu.Cat_Panel.Controls.AddRange(CatButtons);
-                Menu.dataSet1.Tables.AddRange(ListOfTables);
+                MenuWindow.Cat_Panel.Controls.AddRange(CatButtons);
+                MenuWindow.dataSet1.Tables.AddRange(ListOfTables);
             }
 
-            for (int tbls = 0; tbls < Menu.dataSet1.Tables.Count; tbls++)
+            for (int tbls = 0; tbls < MenuWindow.dataSet1.Tables.Count; tbls++)
             {
                 //Add Columns
-                Menu.dataSet1.Tables[tbls].Columns.Add("الاسم", typeof(String));
-                Menu.dataSet1.Tables[tbls].Columns.Add("الحجم", typeof(String));
-                Menu.dataSet1.Tables[tbls].Columns.Add("السعر", typeof(String));
-                Menu.dataSet1.Tables[tbls].Columns.Add("الصنف", typeof(String));
-                Menu.dataSet1.Tables[tbls].Columns.Add("كود", typeof(String));
-                Menu.dataSet1.Tables[tbls].Columns.Add("القسم", typeof(String));
+                MenuWindow.dataSet1.Tables[tbls].Columns.Add("الاسم", typeof(String));
+                MenuWindow.dataSet1.Tables[tbls].Columns.Add("الحجم", typeof(String));
+                MenuWindow.dataSet1.Tables[tbls].Columns.Add("السعر", typeof(String));
+                MenuWindow.dataSet1.Tables[tbls].Columns.Add("الصنف", typeof(String));
+                MenuWindow.dataSet1.Tables[tbls].Columns.Add("كود", typeof(String));
+                MenuWindow.dataSet1.Tables[tbls].Columns.Add("القسم", typeof(String));
             }
             String ItemName = "";
             double ItemPrice = 0;
@@ -477,49 +464,43 @@ namespace ACID
                 ItemPrice = Convert.ToDouble(elemList.Item(items).ChildNodes.Item(3).InnerText);
                 ItemCode = elemList.Item(items).ChildNodes.Item(4).InnerText;
                 CatName = elemList.Item(items).ChildNodes.Item(1).InnerText;
-                CatIndex = Menu.dataSet1.Tables.IndexOf(CatName);
+                CatIndex = MenuWindow.dataSet1.Tables.IndexOf(CatName);
                 Department = elemList.Item(items).ChildNodes.Item(5).InnerText;
                 // add row to corresponding table
-                Menu.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString(), CatName, ItemCode, Department });
+                MenuWindow.dataSet1.Tables[CatIndex].Rows.Add(new String[] { ItemName, ItemSize, ItemPrice.ToString(), CatName, ItemCode, Department });
             }
 
-            Menu.dataGridView1.DataSource = Menu.dataSet1.Tables[0];
+            MenuWindow.dataGridView1.DataSource = MenuWindow.dataSet1.Tables[0];
 
-            Menu.dataGridView1.Columns[0].Width = 400;
-            Menu.dataGridView1.Columns[1].Width = 250;
-            Menu.dataGridView1.Columns[2].Width = 220;
+            MenuWindow.dataGridView1.Columns[0].Width = 400;
+            MenuWindow.dataGridView1.Columns[1].Width = 250;
+            MenuWindow.dataGridView1.Columns[2].Width = 220;
 
-            Menu.dataSet2.Tables.Add(new DataTable("Orders"));
+            MenuWindow.dataSet2.Tables.Add(new DataTable("Orders"));
 
-            Menu.dataSet2.Tables[0].Columns.Add("الكمية", typeof(String));
-            Menu.dataSet2.Tables[0].Columns.Add("الاسم", typeof(String));
-            Menu.dataSet2.Tables[0].Columns.Add("الحجم", typeof(String));
-            Menu.dataSet2.Tables[0].Columns.Add("السعر", typeof(String));
+            MenuWindow.dataSet2.Tables[0].Columns.Add("الكمية", typeof(String));
+            MenuWindow.dataSet2.Tables[0].Columns.Add("الاسم", typeof(String));
+            MenuWindow.dataSet2.Tables[0].Columns.Add("الحجم", typeof(String));
+            MenuWindow.dataSet2.Tables[0].Columns.Add("السعر", typeof(String));
 
-            Menu.dataSet2.Tables.Add(new DataTable("Codes"));
+            MenuWindow.dataSet2.Tables.Add(new DataTable("Codes"));
 
-            Menu.dataSet2.Tables[1].Columns.Add("Code", typeof(String));
-            Menu.dataSet2.Tables[1].Columns.Add("Category", typeof(String));
-            Menu.dataSet2.Tables[1].Columns.Add("القسم", typeof(String));
+            MenuWindow.dataSet2.Tables[1].Columns.Add("Code", typeof(String));
+            MenuWindow.dataSet2.Tables[1].Columns.Add("Category", typeof(String));
+            MenuWindow.dataSet2.Tables[1].Columns.Add("القسم", typeof(String));
 
-            Menu.OrderedList.DataSource = Menu.dataSet2.Tables[0];
+            MenuWindow.OrderedList.DataSource = MenuWindow.dataSet2.Tables[0];
 
-            Menu.OrderedList.Columns[1].ReadOnly = true;
-            Menu.OrderedList.Columns[2].ReadOnly = true;
-            Menu.OrderedList.Columns[3].ReadOnly = true;
+            MenuWindow.OrderedList.Columns[1].ReadOnly = true;
+            MenuWindow.OrderedList.Columns[2].ReadOnly = true;
+            MenuWindow.OrderedList.Columns[3].ReadOnly = true;
 
-            Menu.OrderedList.Columns[0].Width = 50;
-            Menu.OrderedList.Columns[1].Width = 500;
-            Menu.OrderedList.Columns[2].Width = 250;
-            Menu.OrderedList.Columns[2].Width = 230;
+            MenuWindow.OrderedList.Columns[0].Width = 50;
+            MenuWindow.OrderedList.Columns[1].Width = 500;
+            MenuWindow.OrderedList.Columns[2].Width = 250;
+            MenuWindow.OrderedList.Columns[2].Width = 230;
 
-            Menu.ShowDialog();
-
-            /* Revert Back to Customer Schemas*/
-
-            myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-            "pwd=" + Password + ";" + "database=customers;";
-            conn.ConnectionString = myConnectionString;
+            MenuWindow.ShowDialog();
         }
         protected override void CustNum_KeyDown(object sender, KeyEventArgs e)
         {
@@ -533,9 +514,9 @@ namespace ACID
             String CatName = "";
             int TblIndex = 0;
             CatName = ((Button)sender).Text;
-            TblIndex = Menu.dataSet1.Tables.IndexOf(CatName);
-            Menu.CurrentTblindex = TblIndex;
-            Menu.dataGridView1.DataSource = Menu.dataSet1.Tables[TblIndex];
+            TblIndex = MenuWindow.dataSet1.Tables.IndexOf(CatName);
+            MenuWindow.CurrentTblindex = TblIndex;
+            MenuWindow.dataGridView1.DataSource = MenuWindow.dataSet1.Tables[TblIndex];
         }
         protected override void EditBtn_Click(object sender, EventArgs e)
         {
@@ -545,15 +526,12 @@ namespace ACID
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                this.conn.Open();
                 Adapter = new MySqlDataAdapter("SELECT * FROM customers.cust_info;", this.conn);
-                this.conn.Close();
             }
             catch(Exception exep)
             {
                 MessageBox.Show(exep.Message);
                 MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                this.conn.Close();
                 Cursor.Current = Cursors.Default;
                 return;
             }
@@ -595,15 +573,12 @@ namespace ACID
                 cmd.Parameters.AddWithValue("@PhoneNum", this.CustomerForm.CustomerToEdit.GetPhoneNum());
                 try
                 {
-                    this.conn.Open();
                     cmd.ExecuteNonQuery();
-                    this.conn.Close();
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    this.conn.Close();
                     Cursor.Current = Cursors.Default;
                 }
 
@@ -626,7 +601,7 @@ namespace ACID
         {
             String CmdTxt;
             String OrderID;
-            MySqlDataReader reader;
+            MySqlDataReader reader = null;
             bool IsOrderExist = false;
             MySqlCommand cmd = new MySqlCommand();
 
@@ -634,39 +609,26 @@ namespace ACID
             this.CancelForm.ShowDialog();
             if(this.CancelForm.bIsCancelAccepted == true)
             {
-                myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-                "pwd=" + Password + ";" + "database=orders;";
-
-                conn.ConnectionString = myConnectionString;
 
                 OrderID = this.CancelForm.OrderID;
 
                 CmdTxt = @"SELECT * FROM delivery_orders WHERE OrderID =" + OrderID + ";";
 
                 cmd.CommandText = CmdTxt;
-                cmd.Connection = this.conn;
-
+                cmd.Connection = this.conn2;
                 try
                 {
-                    this.conn.Open();
                     reader = cmd.ExecuteReader();
                     while(reader.Read())
                     {
                         IsOrderExist = true;
                     }
-                    this.conn.Close();
+                    reader.Close();
                 }
                 catch (MySqlException exp2)
                 {
                     MessageBox.Show(exp2.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    this.conn.Close();
-
-                    /* Revert Back to Customer Schemas*/
-
-                    myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-                    "pwd=" + Password + ";" + "database=customers;";
-                    conn.ConnectionString = myConnectionString;
                     return;
                 }
 
@@ -676,17 +638,13 @@ namespace ACID
 
                 try
                 {
-                    this.conn.Open();
                     cmd.ExecuteNonQuery();
-                    this.conn.Close();
 
                     CmdTxt = @"DELETE FROM ordered_items WHERE OrderID =" + OrderID + ";";
 
                     cmd.CommandText = CmdTxt;
 
-                    this.conn.Open();
                     cmd.ExecuteNonQuery();
-                    this.conn.Close();
 
                     if (IsOrderExist == true)
                     {
@@ -701,20 +659,7 @@ namespace ACID
                 {
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-
-                    this.conn.Close();
-
-                    /* Revert Back to Customer Schemas*/
-                    myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-                    "pwd=" + Password + ";" + "database=customers;";
-                    conn.ConnectionString = myConnectionString;
                 }
-
-                /* Revert Back to Customer Schemas*/
-
-                myConnectionString = "server=" + Server + ";uid=" + CurrUserID + ";" +
-                "pwd=" + Password + ";" + "database=customers;";
-                conn.ConnectionString = myConnectionString;
 
             }
         }
@@ -727,7 +672,6 @@ namespace ACID
         {
             if(!this.IsDisposed)
             {
-               // Thread.Sleep(20);
                 SetText(MySerialComm.ReadLine().ToString());
             }
         }

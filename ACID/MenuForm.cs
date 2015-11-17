@@ -60,12 +60,13 @@ namespace ACID
         {
             String CmdTxt;
             MySqlCommand cmd = new MySqlCommand();
-            MySqlDataReader reader;
+            MySqlDataReader reader = null;
             DateTime NewDate = new DateTime();
             int SubOrderNo = 0, OrderID;
             DateTime LastOrderDate = new DateTime();
             String Date;
             bool bIsOneOrder = false;
+            double OrderTotal;
             List<String>[] InternalReciptDataElm = new List<string>[2];
 
             NewOrder = new Order(OrderTypes.Delivery);
@@ -80,7 +81,17 @@ namespace ACID
             }
 
             /* Compute Order Total */
-            NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
+            OrderTotal = GetTotalOrderValue();
+            if (OrderTotal == 0)
+            {
+                MessageBox.Show("لا يوجد طلبات");
+                NewOrder = null;
+                return;
+            }
+            else
+            {
+                NewOrder.Order_SetOrderTotal(GetTotalOrderValue());
+            }
 
             /*Dispaly Total*/
             if (!DisplayTotal())
@@ -106,20 +117,19 @@ namespace ACID
 
                 try
                 {
-                    this.myConn.Open();
                     reader = cmd.ExecuteReader();
                     Cursor.Current = Cursors.WaitCursor;
                     while (reader.Read())
                     {
                         NewDate = reader.GetDateTime("current_timestamp()");
                     }
-                    this.myConn.Close();
+                    reader.Close();
                 }
                 catch (MySqlException ex)
                 {
+                    //reader.Close();
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    this.myConn.Close();
                     return;
                 }
 
@@ -128,20 +138,19 @@ namespace ACID
 
                 try
                 {
-                    myConn.Open();
                     reader = cmd.ExecuteReader();
                     Cursor.Current = Cursors.WaitCursor;
                     while (reader.Read())
                     {
                         SubOrderNo = reader.GetInt32("OrderCount");
                     }
-                    myConn.Close();
+                    reader.Close();
                 }
                 catch (MySqlException ex)
                 {
+                    //reader.Close();
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    myConn.Close();
                     return;
                 }
 
@@ -150,20 +159,19 @@ namespace ACID
 
                 try
                 {
-                    this.myConn.Open();
                     reader = cmd.ExecuteReader();
                     Cursor.Current = Cursors.WaitCursor;
                     while (reader.Read())
                     {
                         LastOrderDate = reader.GetDateTime("DateTime");
                     }
-                    this.myConn.Close();
+                    reader.Close();
                 }
                 catch (MySqlException ex)
                 {
+                    //reader.Close();
                     MessageBox.Show(ex.Message);
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    this.myConn.Close();
                     return;
                 }
 
@@ -217,18 +225,12 @@ namespace ACID
 
                 try
                 {
-                    /* Open Command Connection */
-                    this.myConn.Open();
                     /* Execute Command */
                     cmd.ExecuteNonQuery();
-                    /* Close Connection */
-                    this.myConn.Close();
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
-                    /* Close Connection */
-                    this.myConn.Close();
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
                     return;
                 }
@@ -238,8 +240,6 @@ namespace ACID
                 {
                     MessageBox.Show("Error Saving Order on DataBase");
                     MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    /* Close Connection */
-                    this.myConn.Close();
                     return;
                 }
 
@@ -249,17 +249,6 @@ namespace ACID
 
                 cmd.CommandText = CmdTxt;
 
-                try
-                {
-                    myConn.Open();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                    this.myConn.Close();
-                    return;
-                }
 
                 /* Fill Command attributes */
 
@@ -284,12 +273,9 @@ namespace ACID
                     {
                         MessageBox.Show(ex.Message);
                         MessageBox.Show("هذه العملية لم تتم لعدم وجود اتصال بالسيرفر");
-                        this.myConn.Close();
                         return;
                     }
                 }
-
-                this.myConn.Close();
 
                 PrintDocument Reciept = new PrintDocument();
                 Reciept.PrintPage += new PrintPageEventHandler(PrintReciept);
@@ -661,12 +647,8 @@ namespace ACID
 
             try
             {
-                /* Open Command Connection */
-                myConn.Open();
                 /* Execute Command */
                 cmd.ExecuteNonQuery();
-                /* Close Connection */
-                myConn.Close();
             }
             catch (MySqlException ex)
             {
