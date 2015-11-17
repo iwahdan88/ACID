@@ -377,7 +377,7 @@ namespace ACID
             int startY = 0;
             int Offset = 20;
             int fontwidth = 10;
-            String ItemName = "";
+            String ItemName, CatName = "";
             String ItemSize = "";
             String ItemPrice = "";
             String ItemQuantity = "";
@@ -488,14 +488,14 @@ namespace ACID
 
             Offset = Offset + 40;
 
-            graphics.DrawString("طلب               الكمية     سعر",
+            graphics.DrawString("طلب                       الكمية   سعر",
                      new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX-5, startY + Offset, Rformat);
+                     new SolidBrush(Color.Black), startX + 15, startY + Offset, Rformat);
 
             Offset = Offset + 10;
 
-            graphics.DrawString("-------------------------------", new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX-5, startY + Offset, Rformat);
+            graphics.DrawString("--------------------------------------", new Font("Courier New", 8),
+                     new SolidBrush(Color.Black), startX+ 15, startY + Offset, Rformat);
             Offset = Offset + 10;
 
             string SpaceMargin = "   ";
@@ -506,8 +506,9 @@ namespace ACID
                 ItemPrice = this.dataSet2.Tables[0].Rows[i].ItemArray[3].ToString();
                 ItemSize = this.dataSet2.Tables[0].Rows[i].ItemArray[2].ToString();
                 ItemQuantity = this.dataSet2.Tables[0].Rows[i].ItemArray[0].ToString();
+                CatName = this.dataSet2.Tables[1].Rows[i].ItemArray[1].ToString();
 
-                Concat = ItemName + " - " + ItemSize;
+                Concat = CatName + " - " + ItemName + " - " + ItemSize;
 
                 stringCollLenth = Concat.Length;
 
@@ -527,53 +528,53 @@ namespace ACID
                 {
                     Split = SplitString(Concat);
                     graphics.DrawString(Split[0], new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+                     new SolidBrush(Color.Black), startX + 15, startY + Offset, Rformat);
 
                     graphics.DrawString(ItemPrice + SpaceMargin + "|" + SpaceMargin + ItemQuantity, new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX -220, startY + Offset);
+                     new SolidBrush(Color.Black), startX -245, startY + Offset);
 
                     Offset = Offset + 10;
 
                     graphics.DrawString(Split[1], new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+                     new SolidBrush(Color.Black), startX +15, startY + Offset, Rformat);
                     Offset = Offset + 15;
                 }
                 else
                 {
                     graphics.DrawString(Concat, new Font("Courier New", 8),
-                    new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+                    new SolidBrush(Color.Black), startX +15 , startY + Offset, Rformat);
 
                     graphics.DrawString(ItemPrice + SpaceMargin + "|" + SpaceMargin + ItemQuantity, new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX -220, startY + Offset);
+                     new SolidBrush(Color.Black), startX -245, startY + Offset);
 
                     Offset = Offset + 15;
                 }
             }
 
-            graphics.DrawString("-------------------------------", new Font("Courier New", 8),
-                     new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+            graphics.DrawString("--------------------------------------", new Font("Courier New", 8),
+                     new SolidBrush(Color.Black), startX + 15, startY + Offset, Rformat);
 
             Offset = Offset + 15;
 #if DELIVERY
             graphics.DrawString("خدمة التوصيل", new Font("Courier New", fontwidth),
-                    new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+                    new SolidBrush(Color.Black), startX + 15, startY + Offset, Rformat);
 
             graphics.DrawString(NewOrder.Order_GetDeliveryCharge().ToString(), new Font("Courier New", fontwidth),
-                    new SolidBrush(Color.Black), startX - 220, startY + Offset);
+                    new SolidBrush(Color.Black), startX - 245, startY + Offset);
 
             Offset = Offset + 15;
 #endif
 
-            graphics.DrawString("-------------------------------", new Font("Courier New", 8),
-                    new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+            graphics.DrawString("--------------------------------------", new Font("Courier New", 8),
+                    new SolidBrush(Color.Black), startX +15, startY + Offset, Rformat);
 
             Offset = Offset + 15;
 
             graphics.DrawString("الإجمالي", new Font("Courier New", fontwidth, FontStyle.Bold),
-                    new SolidBrush(Color.Black), startX - 5, startY + Offset, Rformat);
+                    new SolidBrush(Color.Black), startX +15, startY + Offset, Rformat);
 
             graphics.DrawString(NewOrder.Order_GetOrderTotal().ToString(), new Font("Courier New", fontwidth, FontStyle.Bold),
-                    new SolidBrush(Color.Black), startX - 220, startY + Offset);
+                    new SolidBrush(Color.Black), startX - 245, startY + Offset);
 
             Offset = Offset + 40;
 
@@ -679,18 +680,18 @@ namespace ACID
             ItemDepartment = this.dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[5].Value.ToString();
             ItemCode = this.dataSet1.Tables[CurrentTblindex].Rows[dataGridView1.SelectedRows[0].Index].ItemArray[4].ToString();
 
-            DataRow[] Names = this.dataSet2.Tables[0].Select("الاسم= '" + ItemName + "' and " + "الحجم= '" + ItemSize + "'");
+            DataRow[] Names = this.dataSet2.Tables[0].Select("Code= '" + ItemCode + "'");
 
             if (Names.Length > 0)
            {
-               count = (String)((this.dataSet2.Tables[0].Select("الاسم= '" + ItemName + "' and " + "الحجم= '" + ItemSize + "'"))[0].ItemArray[0]);
+               count = (String)((this.dataSet2.Tables[0].Select("Code= '" + ItemCode + "'"))[0].ItemArray[0]);
                ItemCount = Convert.ToInt32(count);
                 ItemCount++;
-                this.dataSet2.Tables[0].Rows[this.dataSet2.Tables[0].Rows.IndexOf(this.dataSet2.Tables[0].Select("الاسم= '" + ItemName + "' and " + "الحجم= '" + ItemSize + "'")[0])].SetField(0, ItemCount.ToString());
+                this.dataSet2.Tables[0].Rows[this.dataSet2.Tables[0].Rows.IndexOf(this.dataSet2.Tables[0].Select("Code= '" + ItemCode + "'")[0])].SetField(0, ItemCount.ToString());
            }
             else
            {
-                this.dataSet2.Tables[0].Rows.Add(ItemCount.ToString(), ItemName, ItemSize, ItemPrice);
+               this.dataSet2.Tables[0].Rows.Add(ItemCount.ToString(), ItemName, ItemSize, ItemPrice, ItemCode);
                 dataSet2.Tables[1].Rows.Add(ItemCode, this.dataSet1.Tables[CurrentTblindex].TableName, ItemDepartment);
            }
             

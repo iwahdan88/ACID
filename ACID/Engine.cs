@@ -482,6 +482,7 @@ namespace ACID
             MenuWindow.dataSet2.Tables[0].Columns.Add("الاسم", typeof(String));
             MenuWindow.dataSet2.Tables[0].Columns.Add("الحجم", typeof(String));
             MenuWindow.dataSet2.Tables[0].Columns.Add("السعر", typeof(String));
+            MenuWindow.dataSet2.Tables[0].Columns.Add("Code", typeof(String));
 
             MenuWindow.dataSet2.Tables.Add(new DataTable("Codes"));
 
