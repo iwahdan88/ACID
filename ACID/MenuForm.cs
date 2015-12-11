@@ -512,11 +512,11 @@ namespace ACID
 
                 stringCollLenth = Concat.Length;
 
-                if (Convert.ToInt16(ItemPrice) >= 10)
+                if (Convert.ToDouble(ItemPrice) >= 10)
                 {
                     SpaceMargin = "  ";
                 }
-                else if (Convert.ToInt16(ItemPrice) >= 100)
+                else if (Convert.ToDouble(ItemPrice) >= 100)
                 {
                     SpaceMargin = " ";
                 }

@@ -205,10 +205,10 @@ namespace ACID
             if (AddCustForm.IsDataEntered == true)
             {
                 /* Get Entered Onfo */
-                CustTobeAdded.SetName(AddCustForm.Name);
+                CustTobeAdded.SetName(AddCustForm.CustomerName);
                 CustTobeAdded.SetAddr(AddCustForm.Address);
                 CustTobeAdded.SetPhoneNum(AddCustForm.Phone);
-
+                CustTobeAdded.SetDeliveryCharge(AddCustForm.DeliverCharge);
                 Cursor.Current = Cursors.WaitCursor;
                 /* Register Customer */
                 IsAddSuccess = AddCustomer(CustTobeAdded);
@@ -284,7 +284,7 @@ namespace ACID
         private bool AddCustomer (Customer Cust)
         {
             MySqlCommand cmd = new MySqlCommand();
-            String CmdTxt = @"INSERT INTO cust_info(Phone,Address,Name,No_of_Orders)VALUES(@Phone_Num,@Addr,@CustName,@Orders);";
+            String CmdTxt = @"INSERT INTO cust_info(Phone,Address,Name,No_of_Orders,Delivery_Charge)VALUES(@Phone_Num,@Addr,@CustName,@Orders,@Delivery);";
             bool IsOk = true;
 
             /* Fill Command attributes */
@@ -294,6 +294,7 @@ namespace ACID
             cmd.Parameters.AddWithValue("@Addr", Cust.GetAddr());
             cmd.Parameters.AddWithValue("@CustName", Cust.GetName());
             cmd.Parameters.AddWithValue("@Orders", Cust.GetOrderCount());
+            cmd.Parameters.AddWithValue("@Delivery", Cust.GetDeliveryCharge());
 
             try
             {
@@ -342,6 +343,19 @@ namespace ACID
             XmlNodeList elemList;
             XmlElement root;
             int TotalMenuItems;
+
+            if (conn2.State != ConnectionState.Open)
+            {
+                try
+                {
+                    this.conn2.Open();
+                }
+                catch (Exception Connexp)
+                {
+                    MessageBox.Show(Connexp.Message);
+                    return;
+                }
+            }
 
             try
             {
