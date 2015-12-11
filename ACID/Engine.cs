@@ -15,6 +15,7 @@ using System.Data;
 using System.Drawing;
 using System.Threading;
 using  System.IO.Ports;
+using System.Net;
 
 namespace ACID
 {
@@ -114,7 +115,27 @@ namespace ACID
             /*Get Menu Data*/
             try
             {
-                xmlFile.Load(@"https://storage-download.googleapis.com/menudata/MenuItems_Final.xml");
+                // Create a request for the URL. 		
+                WebRequest request = WebRequest.Create("https://storage-download.googleapis.com/menudata/MenuItems_Final.xml");
+                request.Timeout = 60000;
+                // If required by the server, set the credentials.
+                request.Credentials = CredentialCache.DefaultCredentials;
+                // Get the response.
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                // Get the stream containing content returned by the server.
+                Stream dataStream = response.GetResponseStream();
+                // Open the stream using a StreamReader for easy access.
+                StreamReader reader = new StreamReader(dataStream);
+                // Read the content.
+                string responseFromServer = reader.ReadToEnd();
+
+                // Cleanup the streams and the response.
+                reader.Close();
+                dataStream.Close();
+                response.Close();
+
+                xmlFile.LoadXml(responseFromServer);
                 xmlFile.Save(@"./Backup/MenuItems.xml");
                 PBar.Auth.Invoke(PBar.myDelegate);
                 ProgressTherad.Abort();
